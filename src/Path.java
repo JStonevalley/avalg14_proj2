@@ -6,6 +6,7 @@ public interface Path {
 	 * @param a node in the graph
 	 * @param b node in the graph
 	 * @param distance the distance between node a and b
+	 * @throws IllegalArgumentException if a or b have two neighbours already
 	 */
 	public void setEdge(short a, short b, int distance);
 
