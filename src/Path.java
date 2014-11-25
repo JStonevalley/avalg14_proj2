@@ -22,11 +22,10 @@ public interface Path {
 	/**
 	 * Returns the next node in the path
 	 *
-	 * @param previousNode
 	 * @param currentNode
 	 * @return
 	 */
-	public short getNextNode(short previousNode, short currentNode);
+	public short[] getNeighbourNodes(short currentNode);
 
 	/**
 	 *
