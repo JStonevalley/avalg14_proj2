@@ -41,6 +41,7 @@ public class TwoWayArrayPath implements Path {
 				break;
 			}
 		}
+		length += distance;
 	}
 
 	/**
