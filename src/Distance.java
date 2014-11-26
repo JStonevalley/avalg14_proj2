@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 /**
@@ -6,9 +7,13 @@ import java.util.TreeSet;
  */
 public class Distance {
 	ArrayList<TreeSet<DistanceNode>> distances;
-
+	ArrayList<HashMap<Short, DistanceNode>> distancesHash;
 	public Distance(double[][] nodes) {
 		updateDistances(nodes);
+	}
+
+	public DistanceNode getDistance(short from , short to){
+		return distancesHash.get(from).get(to);
 	}
 
 	public TreeSet<DistanceNode> getDistancesForNode(short nodeNr){
@@ -17,17 +22,21 @@ public class Distance {
 
 	public void updateDistances(double[][] nodes){
 		distances = new ArrayList<TreeSet<DistanceNode>>(nodes.length);
+		distancesHash = new ArrayList<HashMap<Short, DistanceNode>>(nodes.length);
 		for (short i = 0; i < nodes.length; i++) {
 			distances.add(new TreeSet<DistanceNode>());
+			distancesHash.add(new HashMap<Short, DistanceNode>(nodes.length));
 			for (short j = 0; j < nodes.length; j++) {
-				distances.get(i).add(new DistanceNode(j, (int) Math
+				DistanceNode node = new DistanceNode(j, (int) Math
 						.round(Math.sqrt(Math.pow(Math.abs(nodes[i][0] - nodes[j][0]), 2) + Math.pow(Math.abs(
-								nodes[i][1] - nodes[j][1]), 2)))));
+								nodes[i][1] - nodes[j][1]), 2))));
+				distances.get(i).add(node);
+				distancesHash.get(i).put(j, node);
 			}
 		}
 	}
 
-	private class DistanceNode implements Comparable<DistanceNode>{
+	public class DistanceNode implements Comparable<DistanceNode>{
 		private short nodeNr;
 		private int distance;
 		private DistanceNode(short nodeNr, int distance){

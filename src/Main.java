@@ -1,3 +1,5 @@
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Main {
 	public static void main(String[] args) {
@@ -12,9 +14,27 @@ public class Main {
 		}
 		Distance distance = new Distance(nodes);
 		Path path = new TwoWayArrayPath(nodes.length);
-		for (short i = 1; i < numNodes; i++) {
-			path.setEdge((short)(i-1), (short)(i % numNodes), 1);
+		HashSet<Short> inPath = new HashSet<Short>();
+		Iterator<Distance.DistanceNode> it = distance.getDistancesForNode((short)0).iterator();
+		it.next();
+		Distance.DistanceNode next = it.next();
+		path.setEdge((short)0, next.getNodeNr(), next.getDistance());
+		Distance.DistanceNode current = next;
+		inPath.add(current.getNodeNr());
+		inPath.add((short)0);
+		for (short i = 1; i < numNodes-1; i++) {
+			Iterator<Distance.DistanceNode> iterator = distance.getDistancesForNode(current.getNodeNr()).iterator();
+			while(iterator.hasNext()){
+				next = iterator.next();
+				if (!inPath.contains(next.getNodeNr())){
+					break;
+				}
+			}
+			path.setEdge(current.getNodeNr(), next.getNodeNr(), next.getDistance());
+			current = next;
+			inPath.add(current.getNodeNr());
 		}
+		path.setEdge(current.getNodeNr(), (short)0, distance.getDistance(current.getNodeNr(), (short)0).getDistance());
 		System.out.println(path.toString());
 	}
 }
