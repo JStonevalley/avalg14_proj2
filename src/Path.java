@@ -33,6 +33,11 @@ public interface Path {
 	 * @return the total length of the path
 	 */
 	public int getLength();
+	/**
+	 *
+	 * @return true if node is in path
+	 */
+	public boolean inPath(short a);
 
 //	/**
 //	 *

@@ -94,6 +94,17 @@ public class TwoWayArrayPath implements Path {
 		return length;
 	}
 
+	/**
+	 * @param a
+	 * @return true if node is in path
+	 */
+	@Override public boolean inPath(short a) {
+		if (nodes[a][0] < 0 && nodes[a][1] < 0){
+			return false;
+		}
+		return true;
+	}
+
 	public String toString(){
 		HashSet<Short> inString = new HashSet<Short>();
 		StringBuilder sb = new StringBuilder();
