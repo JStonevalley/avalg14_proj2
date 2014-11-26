@@ -20,7 +20,7 @@ public class Distance {
 		return distances.get(nodeNr);
 	}
 
-	public void updateDistances(double[][] nodes){
+	private void updateDistances(double[][] nodes){
 		distances = new ArrayList<TreeSet<DistanceNode>>(nodes.length);
 		distancesHash = new ArrayList<HashMap<Short, DistanceNode>>(nodes.length);
 		for (short i = 0; i < nodes.length; i++) {
