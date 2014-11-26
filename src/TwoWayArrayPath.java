@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 /**
  * Created by Jonas on 2014-11-25.
  */
@@ -90,5 +92,58 @@ public class TwoWayArrayPath implements Path {
 	@Override
 	public int getLength() {
 		return length;
+	}
+
+	public String toString(){
+		HashSet<Short> inString = new HashSet<Short>();
+		StringBuilder sb = new StringBuilder();
+		short start = -1;
+		short prev = -1;
+		short current = -1;
+		while (inString.size() < nodes.length){
+			if (current < 0){
+				for (short i = 0; i < nodes.length; i++) {
+					if (!inString.contains(i)){
+						inString.add(i);
+						sb.append(i);
+						current = i;
+						break;
+					}
+				}
+			}
+			else {
+				if (prev < 0) {
+					prev = current;
+					if (nodes[current][0] > 0) {
+						current = nodes[current][0];
+					} else {
+						current = nodes[current][1];
+					}
+					if (start < 0){
+						start = prev;
+					}
+				} else {
+					short next;
+					if (nodes[current][0] == prev) {
+						next = nodes[current][1];
+					} else {
+						next = nodes[current][0];
+					}
+					prev = current;
+					current = next;
+				}
+				if (current == start || current < 1){
+					start = -1;
+					prev = -1;
+					current = -1;
+					sb.append("\n");
+				}
+				else{
+					sb.append("-" + current);
+					inString.add(current);
+				}
+			}
+		}
+		return sb.toString();
 	}
 }
