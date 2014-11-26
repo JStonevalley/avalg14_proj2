@@ -1,3 +1,5 @@
+import kth.avalg.path.Path;
+import kth.avalg.path.TwoWayArrayPath;
 import org.junit.Assert;
 import org.junit.Test;
 

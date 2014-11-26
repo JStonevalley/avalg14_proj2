@@ -1,3 +1,8 @@
+package kth.avalg.heuristic.iterative;
+
+import kth.avalg.Distance;
+import kth.avalg.path.Path;
+
 import java.util.Random;
 
 /**

@@ -1,9 +1,15 @@
+package kth.avalg.heuristic.construction;
+
+import kth.avalg.Distance;
+import kth.avalg.path.Path;
+import kth.avalg.path.TwoWayArrayPath;
+
 /**
  * Created by Jonas on 2014-11-26.
  */
-public class GreedyConstructionHeuristic implements ConstructionHeuristic {
+public class Greedy implements ConstructionHeuristic {
 	Path path;
-	public GreedyConstructionHeuristic(Distance distance){
+	public Greedy(Distance distance){
 		path = new TwoWayArrayPath(distance.getSortedDistancesForNode((short) 0).length);
 		Distance.DistanceNode next = distance.getSortedDistancesForNode((short) 0)[1];
 		path.setEdge((short)0, next.getNodeNr(), next.getDistance());

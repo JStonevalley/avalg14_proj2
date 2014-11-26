@@ -1,5 +1,7 @@
+package kth.avalg;
 
-import java.util.Random;
+import kth.avalg.heuristic.construction.ConstructionHeuristic;
+import kth.avalg.heuristic.construction.Greedy;
 
 public class Main {
 	public static void main(String[] args) {
@@ -13,9 +15,9 @@ public class Main {
 			nodes[i][1] = io.getDouble();
 		}
 		Distance distance = new Distance(nodes);
-		ConstructionHeuristic construction = new GreedyConstructionHeuristic(distance);
+		ConstructionHeuristic construction = new Greedy(distance);
 		System.out.println(construction.getPath().toString());
-		//TwoOptIterationHeuristic opt = new TwoOptIterationHeuristic(construction.getPath(), distance, new Random());
+//		TwoOptIterationHeuristic opt = new TwoOptIterationHeuristic(construction.getPath(), distance, new Random());
 		//System.out.println(opt.getPath().toString());
 	}
 }

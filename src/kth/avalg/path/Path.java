@@ -1,3 +1,4 @@
+package kth.avalg.path;
 
 public interface Path {
 	/**

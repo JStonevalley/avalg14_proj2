@@ -1,9 +1,11 @@
+import kth.avalg.Distance;
+import kth.avalg.heuristic.construction.ConstructionHeuristic;
+import kth.avalg.heuristic.construction.Greedy;
+import kth.avalg.path.Path;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class GreedyConstructionHeuristicTest {
+public class GreedyTest {
 
 	@Test
 	public void testGetPath() throws Exception {
@@ -20,7 +22,7 @@ public class GreedyConstructionHeuristicTest {
 		nodes[8] = new double[]{82.1407, 41.0270};
 		nodes[9] = new double[]{44.4703, 89.3650};
 		Distance distance = new Distance(nodes);
-		ConstructionHeuristic construction = new GreedyConstructionHeuristic(distance);
+		ConstructionHeuristic construction = new Greedy(distance);
 		Path path = construction.getPath();
 		Assert.assertEquals(323, path.getLength());
 		Assert.assertEquals("0-8-5-4-3-9-6-2-1-7", path.toString());

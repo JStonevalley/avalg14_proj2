@@ -1,3 +1,5 @@
+package kth.avalg;
+
 import java.util.Arrays;
 
 /**

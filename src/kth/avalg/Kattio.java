@@ -1,4 +1,4 @@
-/** Simple yet moderately fast I/O routines.
+package kth.avalg; /** Simple yet moderately fast I/O routines.
  *
  * Example usage:
  *
