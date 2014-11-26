@@ -1,5 +1,5 @@
-import java.util.HashSet;
-import java.util.Iterator;
+
+import java.util.Random;
 
 public class Main {
 	public static void main(String[] args) {
@@ -15,5 +15,7 @@ public class Main {
 		Distance distance = new Distance(nodes);
 		ConstructionHeuristic construction = new GreedyConstructionHeuristic(distance);
 		System.out.println(construction.getPath().toString());
+		//TwoOptIterationHeuristic opt = new TwoOptIterationHeuristic(construction.getPath(), distance, new Random());
+		//System.out.println(opt.getPath().toString());
 	}
 }

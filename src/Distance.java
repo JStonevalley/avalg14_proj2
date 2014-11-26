@@ -1,38 +1,37 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.TreeSet;
+import java.util.Arrays;
 
 /**
  * Created by Jonas on 2014-11-26.
  */
 public class Distance {
-	ArrayList<TreeSet<DistanceNode>> distances;
-	ArrayList<HashMap<Short, DistanceNode>> distancesHash;
+	DistanceNode[][] sortedDistances;
+	int[][] distanceMatrix;
 	public Distance(double[][] nodes) {
 		updateDistances(nodes);
 	}
 
-	public DistanceNode getDistance(short from , short to){
-		return distancesHash.get(from).get(to);
+	public int getDistance(short from , short to){
+		return distanceMatrix[from][to];
 	}
 
-	public TreeSet<DistanceNode> getDistancesForNode(short nodeNr){
-		return distances.get(nodeNr);
+	public DistanceNode[] getSortedDistancesForNode(short nodeNr){
+		return sortedDistances[nodeNr];
 	}
 
 	private void updateDistances(double[][] nodes){
-		distances = new ArrayList<TreeSet<DistanceNode>>(nodes.length);
-		distancesHash = new ArrayList<HashMap<Short, DistanceNode>>(nodes.length);
+		sortedDistances = new DistanceNode[nodes.length][];
+		distanceMatrix = new int[nodes.length][];
 		for (short i = 0; i < nodes.length; i++) {
-			distances.add(new TreeSet<DistanceNode>());
-			distancesHash.add(new HashMap<Short, DistanceNode>(nodes.length));
+			sortedDistances[i] = new DistanceNode[nodes.length];
+			distanceMatrix[i] = new int[nodes.length];
 			for (short j = 0; j < nodes.length; j++) {
 				DistanceNode node = new DistanceNode(j, (int) Math
 						.round(Math.sqrt(Math.pow(Math.abs(nodes[i][0] - nodes[j][0]), 2) + Math.pow(Math.abs(
 								nodes[i][1] - nodes[j][1]), 2))));
-				distances.get(i).add(node);
-				distancesHash.get(i).put(j, node);
+				sortedDistances[i][j] = node;
+				distanceMatrix[i][j] = node.getDistance();
 			}
+			Arrays.sort(sortedDistances[i]);
 		}
 	}
 

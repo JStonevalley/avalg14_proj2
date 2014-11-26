@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -13,6 +14,14 @@ public class TwoWayArrayPath implements Path {
 			nodes[i] = new short[]{-1, -1};
 		}
 		length = 0;
+	}
+
+	public TwoWayArrayPath(TwoWayArrayPath path) {
+		nodes = new short[path.nodes.length][];
+		for (int i = 0; i < path.nodes.length; i++) {
+			nodes[i] = Arrays.copyOfRange(path.nodes[i], 0, 2);
+		}
+		this.length = path.length;
 	}
 
 	/**
@@ -103,6 +112,13 @@ public class TwoWayArrayPath implements Path {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * @return path copy
+	 */
+	@Override public Path copy() {
+		return new TwoWayArrayPath(this);
 	}
 
 	public String toString(){
