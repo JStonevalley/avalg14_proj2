@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -58,26 +59,22 @@ public class ArrayPath implements Path {
 	 * @param b
 	 */
 	@Override public void swap(int x, int y, int a, int b) {
-		int[] newPath = new int[path.length];
-		int newLength = 0;
-		newPath[x] = a;
-		newLength += distances[x][a];
-		newPath[y] = b;
-		newLength += distances[y][b];
-		int current = b;
-		while (path[current] != x){
-			newPath[current] = path[current];
-			newLength += distances[current][path[current]];
+		ArrayList<Integer> reverse = new ArrayList<Integer>();
+		int current = y;
+		reverse.add(current);
+		while(current != a){
 			current = path[current];
+			reverse.add(current);
 		}
-		current = a;
-		while (path[current] != y){
-			newPath[current] = path[current];
-			newLength += distances[current][path[current]];
-			current = path[current];
+		for (int i = reverse.size()-1; i > 0; i--) {
+			path[reverse.get(i)] = reverse.get(i-1);
 		}
-		path = newPath;
-		length = newLength;
+		path[x] = a;
+		length -= distances[x][y];
+		length += distances[x][a];
+		path[y] = b;
+		length -= distances[a][b];
+		length += distances[y][b];
 	}
 
 	/**
