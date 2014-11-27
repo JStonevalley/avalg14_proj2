@@ -31,6 +31,7 @@ public class Main {
 		int[][] distance = distanceClass.calculateDistances(nodes);
 		int[][] closestNodes = distanceClass.getClosestNodes(distance, MAX_NO_CLOSEST_NODES);
 		ConstructionHeuristic heuristic = new GreedyConstruction(distance);
+
 		Path path = new ArrayPath(distance);
 		heuristic.construct(path);
 		if (DEBUG) {
