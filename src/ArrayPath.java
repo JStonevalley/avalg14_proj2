@@ -10,9 +10,9 @@ public class ArrayPath implements Path {
 	private int length;
 	private int[][] distances;
 
-	public ArrayPath(int noNodes, int[][] distances) {
+	public ArrayPath(int[][] distances) {
 		this.distances = distances;
-		path = new int[noNodes];
+		path = new int[distances.length];
 		Arrays.fill(path, -1);
 	}
 
@@ -30,6 +30,11 @@ public class ArrayPath implements Path {
 		}
 		path[a] = -1;
 		length -= distances[a][b];
+	}
+
+	@Override
+	public int getNext(int node) {
+		return path[node];
 	}
 
 	@Override public int[] getNeighbourNodes(int currentNode) {

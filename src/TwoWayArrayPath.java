@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -9,8 +8,9 @@ public class TwoWayArrayPath implements Path {
 	private int length;
 	private int[][] distances;
 
-	public TwoWayArrayPath(int numNodes, int[][] distances) {
+	public TwoWayArrayPath(int[][] distances) {
 		this.distances = distances;
+		int numNodes = distances.length;
 		nodes = new int[numNodes][];
 		for (int i = 0; i < numNodes; i++) {
 			nodes[i] = new int[]{-1, -1};
@@ -85,6 +85,10 @@ public class TwoWayArrayPath implements Path {
 	@Override
 	public int[] getNeighbourNodes(int currentNode) {
 		return nodes[currentNode];
+	}
+
+	@Override public int getNext(int node) {
+		return -1;
 	}
 
 	/**

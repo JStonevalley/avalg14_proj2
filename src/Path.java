@@ -27,6 +27,13 @@ public interface Path {
 
 	/**
 	 *
+	 * @param node the reference node
+	 * @return the next node in the path
+	 */
+	public int getNext(int node);
+
+	/**
+	 *
 	 * @return the total length of the path
 	 */
 	public int getLength();

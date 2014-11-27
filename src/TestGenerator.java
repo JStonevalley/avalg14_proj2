@@ -3,7 +3,7 @@
  */
 public class TestGenerator {
 
-	private static final int NO_EDGES = 2000;
+	private static final int NO_EDGES = 100;
 
 	public static void main(String[] args) {
 		System.out.println(NO_EDGES);

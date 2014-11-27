@@ -18,8 +18,10 @@ public class GreedyTest {
 		nodes[8] = new double[]{82.1407, 41.0270};
 		nodes[9] = new double[]{44.4703, 89.3650};
 
-		ConstructionHeuristic greedy = new Greedy();
-		Path path = greedy.initialize(new DistanceNew().calculateDistances(nodes));
+		int[][] distances = new DistanceNew().calculateDistances(nodes);
+		ConstructionHeuristic greedy = new Greedy(distances);
+		Path path = new ArrayPath(distances);
+		greedy.construct(path);
 		Assert.assertEquals(323, path.getLength());
 		Assert.assertEquals("0-8-5-4-3-9-6-2-1-7\n", path.toDebugString());
 	}

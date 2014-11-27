@@ -2,8 +2,7 @@ public interface ConstructionHeuristic {
 
 	/**
 	 *
-	 * @param distances matrix containing the distance between all nodes
-	 * @return a initial path
+	 * @param path the path to be completed by the heuristic
 	 */
-	public Path initialize(int[][] distances);
+	public void construct(Path path);
 }

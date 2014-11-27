@@ -4,9 +4,14 @@
  */
 public class Greedy implements ConstructionHeuristic {
 
+	private int[][] distances;
+
+	public Greedy(int[][] distances) {
+		this.distances = distances;
+	}
+
 	@Override
-	public Path initialize(int[][] distances) {
-		Path path = new ArrayPath(distances.length);
+	public void construct(Path path) {
 		int startNode = 0; // TODO: check why random gets stuck
 		int currentNode = startNode;
 
@@ -22,12 +27,10 @@ public class Greedy implements ConstructionHeuristic {
 				}
 			}
 
-			path.setEdge(currentNode, closestAvailableNode, distanceToClosestAvailableNode);
+			path.setEdge(currentNode, closestAvailableNode);
 			currentNode = closestAvailableNode;
 		}
 
-		path.setEdge(currentNode, startNode, distances[currentNode][startNode]);
-
-		return path;
+		path.setEdge(currentNode, startNode);
 	}
 }
