@@ -5,11 +5,15 @@ public class TwoOptIterationHeuristic {
 
 	public Path enhance(Path path, int[][] distances){
 		int length = path.getLength();
-		for (int i = 0; i < distances.length; i++) {
-			for (int j = 0; j < distances.length; j++) {
-				if (i != j) {
-					path = checkSwap(path, distances, i, j);
-					length = Math.min(path.getLength(), length);
+		int oldLength = Integer.MAX_VALUE;
+		while (length < oldLength) {
+			oldLength = length;
+			for (int i = 0; i < distances.length; i++) {
+				for (int j = 0; j < distances.length; j++) {
+					if (i != j) {
+						path = checkSwap(path, distances, i, j);
+						length = Math.min(path.getLength(), length);
+					}
 				}
 			}
 		}

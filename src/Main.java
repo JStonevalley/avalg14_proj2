@@ -3,12 +3,12 @@ import java.io.FileInputStream;
 
 public class Main {
 
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 
 	public static void main(String[] args) throws Exception {
 		Kattio io;
 		if (DEBUG) {
-			io = new Kattio(new FileInputStream(new File("data/10000.txt")), System.out);
+			io = new Kattio(new FileInputStream(new File("data/100.txt")), System.out);
 		} else {
 			io = new Kattio(System.in, System.out);
 		}
@@ -21,14 +21,21 @@ public class Main {
 		}
 
 		int[][] distance = new DistanceNew().calculateDistances(nodes);
-		ConstructionHeuristic heuristic = new Greedy(distance);
+		ConstructionHeuristic heuristic = new GreedyConstruction(distance);
 		Path path = new ArrayPath(distance);
 		heuristic.construct(path);
-		io.println(path.getLength());
-		io.println(path);
+		if (DEBUG) {
+			io.println(path.getLength());
+			io.println(path.toDebugString());
+		}
 		path = new TwoOptIterationHeuristic().enhance(path, distance);
-		io.println(path.getLength());
-		io.println(path);
+		if (DEBUG) {
+			io.println(path.getLength());
+			io.println(path.toDebugString());
+		}
+		else {
+			io.println(path);
+		}
 		io.close();
 	}
 }

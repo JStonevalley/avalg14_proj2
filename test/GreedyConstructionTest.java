@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-public class GreedyTest {
+public class GreedyConstructionTest {
 
 	@Test
 	public void testGetPath() throws Exception {
@@ -19,7 +19,7 @@ public class GreedyTest {
 		nodes[9] = new double[]{44.4703, 89.3650};
 
 		int[][] distances = new DistanceNew().calculateDistances(nodes);
-		ConstructionHeuristic greedy = new Greedy(distances);
+		ConstructionHeuristic greedy = new GreedyConstruction(distances);
 		Path path = new ArrayPath(distances);
 		greedy.construct(path);
 		Assert.assertEquals(323, path.getLength());

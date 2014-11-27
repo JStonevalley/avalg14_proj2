@@ -2,11 +2,11 @@
 /**
  * Created by Johan Arnör on 27/11/14.
  */
-public class Greedy implements ConstructionHeuristic {
+public class GreedyConstruction implements ConstructionHeuristic {
 
 	private int[][] distances;
 
-	public Greedy(int[][] distances) {
+	public GreedyConstruction(int[][] distances) {
 		this.distances = distances;
 	}
 
