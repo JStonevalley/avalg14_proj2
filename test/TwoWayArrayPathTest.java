@@ -63,4 +63,20 @@ public class TwoWayArrayPathTest {
 		path.removeEdge((short)0, (short)(numNodes-1), 7);
 		Assert.assertEquals(28, path.getLength());
 	}
+
+	@Test
+	public void testToDebugString() throws Exception {
+		// Initializing Path
+		int numNodes = 5;
+		Path path = new TwoWayArrayPath(numNodes);
+		for (short i = 1; i < numNodes; i++) {
+			path.setEdge((short) (i - 1), i, 7);
+		}
+		path.setEdge((short)0, (short)(numNodes-1), 7);
+		Assert.assertEquals("0-1-2-3-4", path.toDebugString());
+		path.removeEdge((short)0, (short)4, 7);
+		path.removeEdge((short)3, (short)4, 7);
+		path.setEdge((short)3, (short)0, 7);
+		Assert.assertEquals("0-1-2-3\n4", path.toDebugString());
+	}
 }

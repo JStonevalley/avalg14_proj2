@@ -121,7 +121,7 @@ public class TwoWayArrayPath implements Path {
 		return new TwoWayArrayPath(this);
 	}
 
-	public String toString(){
+	private String getString(boolean debug){
 		HashSet<Short> inString = new HashSet<Short>();
 		StringBuilder sb = new StringBuilder();
 		short start = -1;
@@ -166,11 +166,24 @@ public class TwoWayArrayPath implements Path {
 					sb.append("\n");
 				}
 				else{
-					sb.append("\n" + current);
+					if(debug) {
+						sb.append("-" + current);
+					}
+					else{
+						sb.append("\n" + current);
+					}
 					inString.add(current);
 				}
 			}
 		}
 		return sb.toString();
+	}
+	public String toDebugString(){
+		return getString(true);
+	}
+
+	@Override
+	public String toString(){
+		return getString(false);
 	}
 }
