@@ -1,5 +1,3 @@
-package kth.avalg.path;
-
 public interface Path {
 	/**
 	 * Creates an edge between the the nodes a and b

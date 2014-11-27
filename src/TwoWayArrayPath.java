@@ -1,5 +1,3 @@
-package kth.avalg.path;
-
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -168,7 +166,7 @@ public class TwoWayArrayPath implements Path {
 					sb.append("\n");
 				}
 				else{
-					sb.append("-" + current);
+					sb.append("\n" + current);
 					inString.add(current);
 				}
 			}

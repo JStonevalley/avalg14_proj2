@@ -1,9 +1,3 @@
-package kth.avalg.heuristic.construction;
-
-import kth.avalg.Distance;
-import kth.avalg.path.Path;
-import kth.avalg.path.TwoWayArrayPath;
-
 /**
  * Created by Jonas on 2014-11-26.
  */

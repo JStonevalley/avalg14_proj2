@@ -1,7 +1,3 @@
-import kth.avalg.Distance;
-import kth.avalg.heuristic.construction.ConstructionHeuristic;
-import kth.avalg.heuristic.construction.Greedy;
-import kth.avalg.path.Path;
 import org.junit.Assert;
 import org.junit.Test;
 

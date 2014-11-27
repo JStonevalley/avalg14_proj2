@@ -1,7 +1,3 @@
-package kth.avalg.heuristic.construction;
-
-import kth.avalg.path.Path;
-
 public interface ConstructionHeuristic {
 	/**
 	 *
