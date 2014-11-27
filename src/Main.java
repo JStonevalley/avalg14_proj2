@@ -21,10 +21,13 @@ public class Main {
 		}
 
 		int[][] distance = new DistanceNew().calculateDistances(nodes);
-		ConstructionHeuristic heuristic = new RandomConstruction(distance.length);
+		ConstructionHeuristic heuristic = new Greedy(distance);
 		Path path = new ArrayPath(distance);
 		heuristic.construct(path);
-//		path = new TwoOptIterationHeuristic().enhance(path, distance);
+		io.println(path.getLength());
+		io.println(path);
+		path = new TwoOptIterationHeuristic().enhance(path, distance);
+		io.println(path.getLength());
 		io.println(path);
 		io.close();
 	}
