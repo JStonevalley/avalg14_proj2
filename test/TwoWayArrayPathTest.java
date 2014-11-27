@@ -18,6 +18,7 @@ public class TwoWayArrayPathTest {
 			Assert.fail("Should not be able to add 0, " + (numNodes-1) + ". Should already exist");
 		}catch (IllegalArgumentException e){}
 	}
+
 	@Test
 	public void testRemoveEdge() throws Exception {
 		// Initializing Path

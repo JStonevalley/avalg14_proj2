@@ -46,7 +46,7 @@ public class ArrayPath implements Path {
 	 */
 	@Override public String toDebugString() {
 		StringBuilder sb = new StringBuilder();
-		int numInPath = 0;
+		int numInPath = 1;
 		int start = 0;
 		int current = 0;
 
@@ -62,6 +62,7 @@ public class ArrayPath implements Path {
 			while (path[current] > -1 && path[current] != start) {
 				current = path[current];
 				sb.append("-" + current);
+				numInPath++;
 			}
 			sb.append("\n");
 		}
