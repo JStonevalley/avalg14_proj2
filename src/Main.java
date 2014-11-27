@@ -12,6 +12,7 @@ public class Main {
 		int[][] distance = new DistanceNew().calculateDistances(nodes);
 		ConstructionHeuristic greedy = new Greedy();
 		Path path = greedy.initialize(distance);
+		path = new TwoOptIterationHeuristic().enhance(path, distance);
 		io.println(path);
 		io.close();
 	}

@@ -7,8 +7,10 @@ import java.util.HashSet;
 public class TwoWayArrayPath implements Path {
 	private int[][] nodes;
 	private int length;
+	private int[][] distances;
 
-	public TwoWayArrayPath(int numNodes) {
+	public TwoWayArrayPath(int numNodes, int[][] distances) {
+		this.distances = distances;
 		nodes = new int[numNodes][];
 		for (int i = 0; i < numNodes; i++) {
 			nodes[i] = new int[]{-1, -1};
@@ -21,11 +23,10 @@ public class TwoWayArrayPath implements Path {
 	 *
 	 * @param a        node in the graph
 	 * @param b        node in the graph
-	 * @param distance the distance between node a and b
 	 * @throws IllegalArgumentException if a or b have two neighbours already
 	 */
 	@Override
-	public void setEdge(int a, int b, int distance) {
+	public void setEdge(int a, int b) {
 		if(nodes[a][0] >= 0 && nodes[a][1] >= 0){
 			throw new IllegalArgumentException("Already two neighbours of a");
 		}
@@ -44,7 +45,7 @@ public class TwoWayArrayPath implements Path {
 				break;
 			}
 		}
-		length += distance;
+		length += distances[a][b];
 	}
 
 	/**
@@ -52,11 +53,10 @@ public class TwoWayArrayPath implements Path {
 	 *
 	 * @param a        node in the graph
 	 * @param b        node in the graph
-	 * @param distance the distance between node a and b
 	 * @throws IllegalArgumentException if no such edge exists
 	 */
 	@Override
-	public void removeEdge(int a, int b, int distance) {
+	public void removeEdge(int a, int b) {
 		byte aIndex, bIndex;
 		aIndex = -1;
 		bIndex = -1;
@@ -73,7 +73,7 @@ public class TwoWayArrayPath implements Path {
 		}
 		nodes[a][bIndex] = -1;
 		nodes[b][aIndex] = -1;
-		length -= distance;
+		length -= distances[a][b];
 	}
 
 	/**
@@ -104,6 +104,18 @@ public class TwoWayArrayPath implements Path {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * x - y - a - b - x
+	 *
+	 * @param x
+	 * @param y
+	 * @param a
+	 * @param b
+	 */
+	@Override public void swap(int x, int y, int a, int b) {
+
 	}
 
 	private String getString(boolean debug){
