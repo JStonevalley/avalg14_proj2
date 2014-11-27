@@ -5,8 +5,8 @@ import java.util.HashSet;
  * Created by Jonas on 2014-11-25.
  */
 public class TwoWayArrayPath implements Path {
-	int[][] nodes;
-	int length;
+	private int[][] nodes;
+	private int length;
 
 	public TwoWayArrayPath(int numNodes) {
 		nodes = new int[numNodes][];
@@ -14,14 +14,6 @@ public class TwoWayArrayPath implements Path {
 			nodes[i] = new int[]{-1, -1};
 		}
 		length = 0;
-	}
-
-	public TwoWayArrayPath(TwoWayArrayPath path) {
-		nodes = new int[path.nodes.length][];
-		for (int i = 0; i < path.nodes.length; i++) {
-			nodes[i] = Arrays.copyOfRange(path.nodes[i], 0, 2);
-		}
-		this.length = path.length;
 	}
 
 	/**

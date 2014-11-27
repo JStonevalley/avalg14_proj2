@@ -21,6 +21,6 @@ public class GreedyTest {
 		ConstructionHeuristic greedy = new Greedy();
 		Path path = greedy.initialize(new DistanceNew().calculateDistances(nodes));
 		Assert.assertEquals(323, path.getLength());
-		Assert.assertEquals("0-8-5-4-3-9-6-2-1-7", path.toDebugString());
+		Assert.assertEquals("0-8-5-4-3-9-6-2-1-7\n", path.toDebugString());
 	}
 }

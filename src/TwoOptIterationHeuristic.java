@@ -4,34 +4,18 @@ import java.util.Random;
  * Created by Jonas on 2014-11-26.
  */
 public class TwoOptIterationHeuristic {
-	Path path;
-	//FETT BROKEN
-//	public TwoOptIterationHeuristic(Path path, Distance distance, Random random){
-//		int a,b, c, d;
-//		for (int i = 0; i < 10; i++) {
-//			Path temp = path.copy();
-//			a = (int)(random.nextInt(8) + 1);
-//			b = a;
-//			while((b = (int)(random.nextInt(8) + 1)) == a){}
-//			c = temp.getNeighbourNodes(a)[0];
-//			temp.removeEdge(a, c, distance.getDistance(a, c));
-//			if(temp.getNeighbourNodes(b)[0] > 0){
-//				d = temp.getNeighbourNodes(b)[0];
-//			}
-//			else{
-//				d = temp.getNeighbourNodes(b)[1];
-//			}
-//			temp.removeEdge(b, d, distance.getDistance(b, d));
-//			temp.setEdge(a, d, distance.getDistance(a, d));
-//			temp.setEdge(b, c, distance.getDistance(b, c));
-//			if (temp.getLength() < path.getLength()){
-//				path = temp;
+//
+//	public Path enhance(Path path, int[][] distances){
+//		int length = path.getLength();
+//		for (int i = 0; i < distances.length; i++) {
+//			for (int j = 0; j < distances.length; j++) {
+//				new_route = 2optSwap(existing_route, i, k)
 //			}
 //		}
-//		this.path = path;
+//		return path;
 //	}
-
-	public Path getPath(){
-		return path;
-	}
+//
+//	private Path (Path path, int[][]distances, int node){
+//
+//	}
 }

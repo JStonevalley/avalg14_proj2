@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Created by Johan Arnör on 27/11/14.
@@ -45,6 +46,7 @@ public class ArrayPath implements Path {
 	 * @return a string to follow the path
 	 */
 	@Override public String toDebugString() {
+		HashSet<Integer> inString = new HashSet<Integer>();
 		StringBuilder sb = new StringBuilder();
 		int numInPath = 1;
 		int start = 0;
@@ -52,16 +54,19 @@ public class ArrayPath implements Path {
 
 		while(numInPath < path.length) {
 			for (int i = 0; i < path.length; i++) {
-				if(!inPath(i)){
+				if(!inString.contains(i)){
 					start = i;
 					current = start;
 					sb.append(start);
+					inString.add(start);
 					numInPath++;
+					break;
 				}
 			}
 			while (path[current] > -1 && path[current] != start) {
 				current = path[current];
 				sb.append("-" + current);
+				inString.add(current);
 				numInPath++;
 			}
 			sb.append("\n");
