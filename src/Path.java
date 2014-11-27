@@ -41,12 +41,6 @@ public interface Path {
 
 	/**
 	 *
-	 * @return path copy
-	 */
-	public Path copy();
-
-	/**
-	 *
 	 * @return a string to follow the path
 	 */
 	public String toDebugString();

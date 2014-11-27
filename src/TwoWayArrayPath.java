@@ -114,13 +114,6 @@ public class TwoWayArrayPath implements Path {
 		return true;
 	}
 
-	/**
-	 * @return path copy
-	 */
-	@Override public Path copy() {
-		return new TwoWayArrayPath(this);
-	}
-
 	private String getString(boolean debug){
 		HashSet<Integer> inString = new HashSet<Integer>();
 		StringBuilder sb = new StringBuilder();

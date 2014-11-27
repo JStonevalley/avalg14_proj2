@@ -30,26 +30,42 @@ public class ArrayPath implements Path {
 	}
 
 	@Override public int[] getNeighbourNodes(int currentNode) {
-		return new int[0];
+		return new int[]{path[currentNode]};
 	}
 
 	@Override public int getLength() {
-		return 0;
+		return length;
 	}
 
 	@Override public boolean inPath(int a) {
 		return path[a] >= 0;
 	}
 
-	@Override public Path copy() {
-		return null;
-	}
-
 	/**
 	 * @return a string to follow the path
 	 */
 	@Override public String toDebugString() {
-		return null;
+		StringBuilder sb = new StringBuilder();
+		int numInPath = 0;
+		int start = 0;
+		int current = 0;
+
+		while(numInPath < path.length) {
+			for (int i = 0; i < path.length; i++) {
+				if(!inPath(i)){
+					start = i;
+					current = start;
+					sb.append(start);
+					numInPath++;
+				}
+			}
+			while (path[current] > -1 && path[current] != start) {
+				current = path[current];
+				sb.append("-" + current);
+			}
+			sb.append("\n");
+		}
+		return sb.toString();
 	}
 
 	@Override
