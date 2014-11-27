@@ -1,21 +1,20 @@
-/**
- * Created by Jonas on 2014-11-26.
- */
+
 public class TwoOptIterationHeuristic {
 
-	public Path enhance(Path path, int[][] distances){
+	public Path enhance(Path path, int[][] distances, int[][] closestNodes){
 		int length = path.getLength();
 		int oldLength = Integer.MAX_VALUE;
 		while (length < oldLength) {
 			oldLength = length;
 //			outer: // TODO: Maybe enable this optimization later
 			for (int i = 0; i < distances.length; i++) {
-				for (int j = 0; j < distances.length; j++) {
-					if (i != j) {
-						path = checkSwap(path, distances, i, j);
+				for (int j = 0; j < closestNodes[i].length; j++) {
+					int index = closestNodes[i][j];
+					if (i != index) {
+						path = checkSwap(path, distances, i, index);
 						length = Math.min(path.getLength(), length);
-//						if (length < oldLength)
-//							break outer;
+						if (length < oldLength)
+							break; // TODO: Fiddle between breaking the inner or outer loop
 					}
 				}
 			}

@@ -3,9 +3,15 @@ import java.io.FileInputStream;
 
 public class Main {
 
-	private static final boolean DEBUG = false;
+	private static boolean DEBUG = true;
+	private static int MAX_NO_CLOSEST_NODES = 120;
 
 	public static void main(String[] args) throws Exception {
+
+		String osVersion = System.getProperty("os.name");
+		if (!(osVersion.contains("Mac") || osVersion.contains("Windows")))
+			DEBUG = false;
+
 		long startTime = System.nanoTime();
 		Kattio io;
 		if (DEBUG) {
@@ -21,7 +27,9 @@ public class Main {
 			nodes[i][1] = io.getDouble();
 		}
 
-		int[][] distance = new DistanceNew().calculateDistances(nodes);
+		DistanceNew distanceClass = new DistanceNew();
+		int[][] distance = distanceClass.calculateDistances(nodes);
+		int[][] closestNodes = distanceClass.getClosestNodes(distance, MAX_NO_CLOSEST_NODES);
 		ConstructionHeuristic heuristic = new GreedyConstruction(distance);
 		Path path = new ArrayPath(distance);
 		heuristic.construct(path);
@@ -29,7 +37,7 @@ public class Main {
 			io.println(path.getLength());
 			io.println(path.toDebugString());
 		}
-		path = new TwoOptIterationHeuristic().enhance(path, distance);
+		path = new TwoOptIterationHeuristic().enhance(path, distance, closestNodes);
 		if (DEBUG) {
 			io.println(path.getLength());
 			io.println(path.toDebugString());
