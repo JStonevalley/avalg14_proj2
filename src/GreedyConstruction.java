@@ -1,7 +1,4 @@
 
-/**
- * Created by Johan Arnör on 27/11/14.
- */
 public class GreedyConstruction implements ConstructionHeuristic {
 
 	private int[][] distances;

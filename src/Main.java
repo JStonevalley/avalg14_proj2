@@ -6,9 +6,10 @@ public class Main {
 	private static final boolean DEBUG = true;
 
 	public static void main(String[] args) throws Exception {
+		long startTime = System.nanoTime();
 		Kattio io;
 		if (DEBUG) {
-			io = new Kattio(new FileInputStream(new File("data/100.txt")), System.out);
+			io = new Kattio(new FileInputStream(new File("data/1000.txt")), System.out);
 		} else {
 			io = new Kattio(System.in, System.out);
 		}
@@ -32,6 +33,7 @@ public class Main {
 		if (DEBUG) {
 			io.println(path.getLength());
 			io.println(path.toDebugString());
+			io.println((System.nanoTime() - startTime)/(1000*1000) + "ms");
 		}
 		else {
 			io.println(path);

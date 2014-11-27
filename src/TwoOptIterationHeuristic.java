@@ -8,11 +8,14 @@ public class TwoOptIterationHeuristic {
 		int oldLength = Integer.MAX_VALUE;
 		while (length < oldLength) {
 			oldLength = length;
+//			outer: // TODO: Maybe enable this optimization later
 			for (int i = 0; i < distances.length; i++) {
 				for (int j = 0; j < distances.length; j++) {
 					if (i != j) {
 						path = checkSwap(path, distances, i, j);
 						length = Math.min(path.getLength(), length);
+//						if (length < oldLength)
+//							break outer;
 					}
 				}
 			}
