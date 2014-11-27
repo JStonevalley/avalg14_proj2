@@ -1,3 +1,5 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.HashSet;
 
 /**
@@ -119,7 +121,7 @@ public class TwoWayArrayPath implements Path {
 	 * @param b
 	 */
 	@Override public void swap(int x, int y, int a, int b) {
-
+		throw new NotImplementedException(); //TODO implement if needed
 	}
 
 	private String getString(boolean debug){
