@@ -7,7 +7,7 @@ public interface Path {
 	 * @param distance the distance between node a and b
 	 * @throws IllegalArgumentException if a or b have two neighbours already
 	 */
-	public void setEdge(short a, short b, int distance);
+	public void setEdge(int a, int b, int distance);
 
 	/**
 	 * Removes an edge between the the nodes a and b
@@ -17,7 +17,7 @@ public interface Path {
 	 * @param distance the distance between node a and b
 	 * @throws IllegalArgumentException if no such edge exists
 	 */
-	public void removeEdge(short a, short b, int distance);
+	public void removeEdge(int a, int b, int distance);
 
 	/**
 	 * Returns the next node in the path
@@ -25,7 +25,7 @@ public interface Path {
 	 * @param currentNode
 	 * @return
 	 */
-	public short[] getNeighbourNodes(short currentNode);
+	public int[] getNeighbourNodes(int currentNode);
 
 	/**
 	 *
@@ -37,7 +37,7 @@ public interface Path {
 	 *
 	 * @return true if node is in path
 	 */
-	public boolean inPath(short a);
+	public boolean inPath(int a);
 
 	/**
 	 *
