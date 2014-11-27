@@ -4,20 +4,18 @@ public interface Path {
 	 *
 	 * @param a node in the graph
 	 * @param b node in the graph
-	 * @param distance the distance between node a and b
 	 * @throws IllegalArgumentException if a or b have two neighbours already
 	 */
-	public void setEdge(int a, int b, int distance);
+	public void setEdge(int a, int b);
 
 	/**
 	 * Removes an edge between the the nodes a and b
 	 *
 	 * @param a node in the graph
 	 * @param b node in the graph
-	 * @param distance the distance between node a and b
 	 * @throws IllegalArgumentException if no such edge exists
 	 */
-	public void removeEdge(int a, int b, int distance);
+	public void removeEdge(int a, int b);
 
 	/**
 	 * Returns the next node in the path
@@ -38,6 +36,15 @@ public interface Path {
 	 * @return true if node is in path
 	 */
 	public boolean inPath(int a);
+
+	/**
+	 * x - y - a - b - x
+	 * @param x
+	 * @param y
+	 * @param a
+	 * @param b
+	 */
+	public void swap(int x, int y, int a, int b);
 
 	/**
 	 *

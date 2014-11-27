@@ -8,26 +8,28 @@ public class ArrayPath implements Path {
 
 	private int[] path;
 	private int length;
+	private int[][] distances;
 
-	public ArrayPath(int noNodes) {
+	public ArrayPath(int noNodes, int[][] distances) {
+		this.distances = distances;
 		path = new int[noNodes];
 		Arrays.fill(path, -1);
 	}
 
-	@Override public void setEdge(int a, int b, int distance) {
+	@Override public void setEdge(int a, int b) {
 		if(path[a] >= 0){
 			throw new IllegalArgumentException("a already has an edge from it");
 		}
 		path[a] = b;
-		length += distance;
+		length += distances[a][b];
 	}
 
-	@Override public void removeEdge(int a, int b, int distance) {
+	@Override public void removeEdge(int a, int b) {
 		if(path[a] < 0){
 			throw new IllegalArgumentException("a does not have an edge from it");
 		}
 		path[a] = -1;
-		length -= distance;
+		length -= distances[a][b];
 	}
 
 	@Override public int[] getNeighbourNodes(int currentNode) {
@@ -40,6 +42,37 @@ public class ArrayPath implements Path {
 
 	@Override public boolean inPath(int a) {
 		return path[a] >= 0;
+	}
+
+	/**
+	 * x - y - a - b - x
+	 *
+	 * @param x
+	 * @param y
+	 * @param a
+	 * @param b
+	 */
+	@Override public void swap(int x, int y, int a, int b) {
+		int[] newPath = new int[path.length];
+		int newLength = 0;
+		newPath[x] = a;
+		newLength += distances[x][a];
+		newPath[y] = b;
+		newLength += distances[y][b];
+		int current = b;
+		while (path[current] != x){
+			newPath[current] = path[current];
+			newLength += distances[current][path[current]];
+			current = path[current];
+		}
+		current = a;
+		while (path[current] != y){
+			newPath[current] = path[current];
+			newLength += distances[current][path[current]];
+			current = path[current];
+		}
+		path = newPath;
+		length = newLength;
 	}
 
 	/**
