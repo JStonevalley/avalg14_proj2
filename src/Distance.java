@@ -10,21 +10,21 @@ public class Distance {
 		updateDistances(nodes);
 	}
 
-	public int getDistance(short from , short to){
+	public int getDistance(int from , int to){
 		return distanceMatrix[from][to];
 	}
 
-	public DistanceNode[] getSortedDistancesForNode(short nodeNr){
+	public DistanceNode[] getSortedDistancesForNode(int nodeNr){
 		return sortedDistances[nodeNr];
 	}
 
 	private void updateDistances(double[][] nodes){
 		sortedDistances = new DistanceNode[nodes.length][];
 		distanceMatrix = new int[nodes.length][];
-		for (short i = 0; i < nodes.length; i++) {
+		for (int i = 0; i < nodes.length; i++) {
 			sortedDistances[i] = new DistanceNode[nodes.length];
 			distanceMatrix[i] = new int[nodes.length];
-			for (short j = 0; j < nodes.length; j++) {
+			for (int j = 0; j < nodes.length; j++) {
 				DistanceNode node = new DistanceNode(j, (int) Math
 						.round(Math.sqrt(Math.pow(Math.abs(nodes[i][0] - nodes[j][0]), 2) + Math.pow(Math.abs(
 								nodes[i][1] - nodes[j][1]), 2))));
@@ -36,14 +36,14 @@ public class Distance {
 	}
 
 	public class DistanceNode implements Comparable<DistanceNode>{
-		private short nodeNr;
+		private int nodeNr;
 		private int distance;
-		private DistanceNode(short nodeNr, int distance){
+		private DistanceNode(int nodeNr, int distance){
 			this.nodeNr = nodeNr;
 			this.distance = distance;
 		}
 
-		public short getNodeNr() {
+		public int getNodeNr() {
 			return nodeNr;
 		}
 

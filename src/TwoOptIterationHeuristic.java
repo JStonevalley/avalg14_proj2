@@ -7,12 +7,12 @@ public class TwoOptIterationHeuristic {
 	Path path;
 	//FETT BROKEN
 	public TwoOptIterationHeuristic(Path path, Distance distance, Random random){
-		short a,b, c, d;
+		int a,b, c, d;
 		for (int i = 0; i < 10; i++) {
 			Path temp = path.copy();
-			a = (short)(random.nextInt(8) + 1);
+			a = (int)(random.nextInt(8) + 1);
 			b = a;
-			while((b = (short)(random.nextInt(8) + 1)) == a){}
+			while((b = (int)(random.nextInt(8) + 1)) == a){}
 			c = temp.getNeighbourNodes(a)[0];
 			temp.removeEdge(a, c, distance.getDistance(a, c));
 			if(temp.getNeighbourNodes(b)[0] > 0){

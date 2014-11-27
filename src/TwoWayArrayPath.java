@@ -5,19 +5,19 @@ import java.util.HashSet;
  * Created by Jonas on 2014-11-25.
  */
 public class TwoWayArrayPath implements Path {
-	short[][] nodes;
+	int[][] nodes;
 	int length;
 
 	public TwoWayArrayPath(int numNodes) {
-		nodes = new short[numNodes][];
+		nodes = new int[numNodes][];
 		for (int i = 0; i < numNodes; i++) {
-			nodes[i] = new short[]{-1, -1};
+			nodes[i] = new int[]{-1, -1};
 		}
 		length = 0;
 	}
 
 	public TwoWayArrayPath(TwoWayArrayPath path) {
-		nodes = new short[path.nodes.length][];
+		nodes = new int[path.nodes.length][];
 		for (int i = 0; i < path.nodes.length; i++) {
 			nodes[i] = Arrays.copyOfRange(path.nodes[i], 0, 2);
 		}
@@ -33,7 +33,7 @@ public class TwoWayArrayPath implements Path {
 	 * @throws IllegalArgumentException if a or b have two neighbours already
 	 */
 	@Override
-	public void setEdge(short a, short b, int distance) {
+	public void setEdge(int a, int b, int distance) {
 		if(nodes[a][0] >= 0 && nodes[a][1] >= 0){
 			throw new IllegalArgumentException("Already two neighbours of a");
 		}
@@ -64,7 +64,7 @@ public class TwoWayArrayPath implements Path {
 	 * @throws IllegalArgumentException if no such edge exists
 	 */
 	@Override
-	public void removeEdge(short a, short b, int distance) {
+	public void removeEdge(int a, int b, int distance) {
 		byte aIndex, bIndex;
 		aIndex = -1;
 		bIndex = -1;
@@ -88,10 +88,10 @@ public class TwoWayArrayPath implements Path {
 	 * Returns the next node in the path
 	 *
 	 * @param currentNode
-	 * @return short[] of neighbouring nodes. Values in the array that are -1 represent no neighbour
+	 * @return int[] of neighbouring nodes. Values in the array that are -1 represent no neighbour
 	 */
 	@Override
-	public short[] getNeighbourNodes(short currentNode) {
+	public int[] getNeighbourNodes(int currentNode) {
 		return nodes[currentNode];
 	}
 
@@ -107,7 +107,7 @@ public class TwoWayArrayPath implements Path {
 	 * @param a
 	 * @return true if node is in path
 	 */
-	@Override public boolean inPath(short a) {
+	@Override public boolean inPath(int a) {
 		if (nodes[a][0] < 0 && nodes[a][1] < 0){
 			return false;
 		}
@@ -122,14 +122,14 @@ public class TwoWayArrayPath implements Path {
 	}
 
 	private String getString(boolean debug){
-		HashSet<Short> inString = new HashSet<Short>();
+		HashSet<Integer> inString = new HashSet<Integer>();
 		StringBuilder sb = new StringBuilder();
-		short start = -1;
-		short prev = -1;
-		short current = -1;
+		int start = -1;
+		int prev = -1;
+		int current = -1;
 		while (inString.size() < nodes.length){
 			if (current < 0){
-				for (short i = 0; i < nodes.length; i++) {
+				for (int i = 0; i < nodes.length; i++) {
 					if (!inString.contains(i)){
 						inString.add(i);
 						sb.append(i);
@@ -150,7 +150,7 @@ public class TwoWayArrayPath implements Path {
 						start = prev;
 					}
 				} else {
-					short next;
+					int next;
 					if (nodes[current][0] == prev) {
 						next = nodes[current][1];
 					} else {
