@@ -45,6 +45,12 @@ public interface Path {
 	 */
 	public Path copy();
 
+	/**
+	 *
+	 * @return a string to follow the path
+	 */
+	public String toDebugString();
+
 //	/**
 //	 *
 //	 * @return true if the graph only contains one component
