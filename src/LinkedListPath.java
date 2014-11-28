@@ -70,11 +70,7 @@ public class LinkedListPath implements Path {
 			path[reverse.get(i)] = reverse.get(i-1);
 		}
 		path[x] = a;
-//		length -= distances[x][y];
-//		length += distances[x][a];
 		path[y] = b;
-//		length -= distances[a][b];
-//		length += distances[y][b];
 	}
 
 	/**

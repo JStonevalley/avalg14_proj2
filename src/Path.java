@@ -28,7 +28,7 @@ public interface Path {
 	 * @param distance matrix of all the distances in the graph
 	 * @return the total length of the path
 	 */
-	public int getLength(int[][] distance);
+	public int getLength(int[][] distances);
 
 	/**
 	 *
