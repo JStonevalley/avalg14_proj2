@@ -37,7 +37,8 @@ public interface Path {
 	public boolean inPath(int a);
 
 	/**
-	 * x - y - k - l - m - a - b - n - o - x -> x - a - k - l - m - y - b - n - o - x
+	 * x - y - k - l - m - a - b - n - o - x ->
+	 * x - a - k - l - m - y - b - n - o - x
 	 * @param x to be connected to a was connected to y
 	 * @param y to be connected to b was connected to x
 	 * @param a to be connected to x was connected to b

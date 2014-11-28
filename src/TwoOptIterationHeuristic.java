@@ -12,12 +12,10 @@ public class TwoOptIterationHeuristic {
 //					if (path.getNext(j) == closestNodes[j][0]) // TODO: Examine this optimization
 //						break;
 					int index = closestNodes[i][j];
-					if (i != index) {
-						path = checkSwap(path, distances, i, index);
-						length = Math.min(path.getLength(), length);
-						if (length < oldLength)
-							break outer; // TODO: Fiddle between breaking the inner or outer loop
-					}
+					path = checkSwap(path, distances, i, index);
+					length = Math.min(path.getLength(), length);
+					if (length < oldLength)
+						break outer; // TODO: Fiddle between breaking the inner or outer loop
 				}
 			}
 		}
