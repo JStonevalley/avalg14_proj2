@@ -32,7 +32,7 @@ public class Main {
 		int[][] closestNodes = distanceClass.getClosestNodes(distance, MAX_NO_CLOSEST_NODES);
 		ConstructionHeuristic heuristic = new GreedyConstruction(distance);
 
-		Path path = new ArrayPath(distance);
+		Path path = new ArrayPath(distance); // Swap datastructure here
 		heuristic.construct(path);
 		if (DEBUG) {
 			io.println(path.getLength());
