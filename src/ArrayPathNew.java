@@ -1,9 +1,5 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by Johan Arnör on 28/11/14.
- */
 public class ArrayPathNew implements Path {
 
 	private final int NULL_NODE = -1;
@@ -19,10 +15,16 @@ public class ArrayPathNew implements Path {
 	// TODO: Make it less dangerous.
 	@Override public void setEdge(int a, int b) {
 		if (indices[a] == NULL_NODE) { // node a has no edge yet
-			path[0] = a;
-			path[1] = b;
-			indices[a] = 0;
-			indices[b] = 1;
+			if (path.length == 1) {
+				path[0] = a;
+				indices[0] = 0;
+			} else {
+				path[0] = a;
+				path[1] = b;
+				indices[a] = 0;
+				indices[b] = 1;
+			}
+
 		} else {
 			int bIndex = (indices[a] + 1) % path.length;
 			indices[b] = bIndex;
@@ -38,6 +40,7 @@ public class ArrayPathNew implements Path {
 		return path[(indices[node] + 1) % path.length];
 	}
 
+	// TODO: Check if not equal in reversed order
 	@Override public int getLength(int[][] distances) {
 		int length = 0;
 		int startNode = path[0];
@@ -53,24 +56,18 @@ public class ArrayPathNew implements Path {
 	}
 
 	@Override public boolean inPath(int a) {
+		if (a < 0 || a >= path.length) throw new NullPointerException();
 		return indices[a] != NULL_NODE;
 	}
 
-//	@Override public void swap(int x, int y, int a, int b) {
-//		int aIndex = indices[a];
-//		int yIndex = indices[y];
-//		ArrayList<Integer> reversedList = getReversedList(Math.min(aIndex, yIndex), Math.max(aIndex, yIndex));
-//	}
-//
-//	private ArrayList<Integer> getReversedList(int from, int to) {
-//		ArrayList<Integer> reversed = new ArrayList<Integer>();
-//		while (from != to) {
-//			reversed.add()
-//		}
-//	}
-
-	// Old broken swap
 	@Override public void swap(int x, int y, int a, int b) {
+//		if (x >= path.length || y >= path.length || a >= path.length || b >= path.length) {
+//			throw new NullPointerException();
+//		}
+//		if (x < 0 || y < 0|| a < 0 || b < 0) {
+//			throw new NullPointerException();
+//		}
+
 		int aIndex = indices[a];
 		int yIndex = indices[y];
 
@@ -79,11 +76,9 @@ public class ArrayPathNew implements Path {
 
 		if (yIndex < aIndex) reverse(yIndex, aIndex);
 		else if (bIndex < xIndex) reverse(bIndex, xIndex);
-//		reverse(Math.min(aIndex, yIndex), Math.max(aIndex, yIndex));
 	}
 
 	private void reverse(int startIndex, int endIndex) {
-//		startIndex++; endIndex--; // do not reverse the endpoint nodes
 		while (endIndex > startIndex) {
 			int tempNode = path[endIndex];
 			int tempIndex = indices[path[endIndex]];

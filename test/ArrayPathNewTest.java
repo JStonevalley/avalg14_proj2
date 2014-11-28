@@ -11,12 +11,16 @@ public class ArrayPathNewTest {
 			path.setEdge(i, i+1);
 		}
 
-		Assert.assertEquals("0-1-2-3-4-5-6-7-8-9", path.toDebugString());
+		Assert.assertEquals("0-1-2-3-4-5-6-7-8-9\n", path.toDebugString());
 		path.swap(2, 3, 6, 7);
-		Assert.assertEquals("0-1-2-6-5-4-3-7-8-9", path.toDebugString());
+		Assert.assertEquals("0-1-2-6-5-4-3-7-8-9\n", path.toDebugString());
 		path.swap(2, 6, 3, 7);
-		Assert.assertEquals("0-1-2-3-4-5-6-7-8-9", path.toDebugString());
+		Assert.assertEquals("0-1-2-3-4-5-6-7-8-9\n", path.toDebugString());
 		path.swap(1, 2, 6, 7);
-		Assert.assertEquals("0-1-6-5-4-3-2-7-8-9", path.toDebugString());
+		Assert.assertEquals("0-1-6-5-4-3-2-7-8-9\n", path.toDebugString());
+		path.swap(9, 0, 4, 3);
+		Assert.assertEquals("4-5-6-1-0-3-2-7-8-9\n", path.toDebugString());
+		path.swap(4, 5, 4, 5);
+		Assert.assertEquals("4-5-6-1-0-3-2-7-8-9\n", path.toDebugString());
 	}
 }

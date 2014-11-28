@@ -14,8 +14,6 @@ public class TwoOptIterationHeuristic {
 					int closeNode = closestNodes[i][j];
 					if (shouldSwap(path, distances, i, closeNode)) {
 						path.swap(i, path.getNext(i), closeNode, path.getNext(closeNode));
-//						System.out.println(path.getLength(distances));
-//						System.out.println(i + "," + closeNode + " --> " + path.toDebugString());
 						noChange = false;
 //						break outer; // TODO: Fiddle between breaking the inner or outer loop
 					}
