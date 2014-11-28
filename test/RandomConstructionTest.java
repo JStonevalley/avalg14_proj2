@@ -10,7 +10,7 @@ public class RandomConstructionTest {
 		int noNodes = 100;
 		HashSet<Integer> seenNodes = new HashSet<Integer>();
 		int[][] nullArray = new int[noNodes][noNodes];
-		Path path = new ArrayPath(nullArray);
+		Path path = new LinkedListPath(nullArray);
 		new RandomConstruction(noNodes).construct(path);
 
 		for (int i = 0; i < noNodes; i++) {

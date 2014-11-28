@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TwoWayArrayPathTest {
+public class TwoWayLinkedListPathTest {
 
 
 	@Test

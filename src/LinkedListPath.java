@@ -1,56 +1,45 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * Created by Johan Arnör on 27/11/14.
  */
-public class ArrayPath implements Path {
+public class LinkedListPath implements Path {
 
-	private ArrayList<Integer> path;
+	private int[] path;
 	private int length;
-	private HashMap<Integer, Integer> indexMapping;
 	private int[][] distances;
 
-	public ArrayPath(int[][] distances) {
+	public LinkedListPath(int[][] distances) {
 		this.distances = distances;
-		indexMapping = new HashMap<Integer, Integer>(distances.length+1);
-		path = new ArrayList<Integer>(distances.length+1);
+		path = new int[distances.length];
+		Arrays.fill(path, -1);
 	}
 
 	@Override public void setEdge(int a, int b) {
-		if (path.size() > 0 && path.get(path.size()-1) != a){
-			throw new IllegalArgumentException("a already has an edge from it or a is not in the path");
+		if(path[a] >= 0){
+			throw new IllegalArgumentException("a already has an edge from it");
 		}
-		if (path.size() == distances.length+1){
-			throw new IllegalArgumentException("path is already complete");
-		}
-		if (path.size() == 0){
-			indexMapping.put(a, path.size());
-			path.add(a);
-		}
-		indexMapping.put(b, path.size());
-		path.add(b);
+		path[a] = b;
 		length += distances[a][b];
 	}
 
 	@Override public void removeEdge(int a, int b) {
-		if(path.get(path.size()-1) != b){
-			throw new IllegalArgumentException("there is such edge or the arguments are swaped");
+		if(path[a] < 0){
+			throw new IllegalArgumentException("a does not have an edge from it");
 		}
-		path.remove(path.size()-1);
-		indexMapping.remove(path.size());
+		path[a] = -1;
 		length -= distances[a][b];
 	}
 
 	@Override
 	public int getNext(int node) {
-		return path.get(indexMapping.get(node));
+		return path[node];
 	}
 
 	@Override public int[] getNeighbourNodes(int currentNode) {
-		return new int[]{path.get(indexMapping.get(currentNode))};
+		return new int[]{path[currentNode]};
 	}
 
 	@Override public int getLength() {
@@ -58,7 +47,7 @@ public class ArrayPath implements Path {
 	}
 
 	@Override public boolean inPath(int a) {
-		return indexMapping.containsKey(a);
+		return path[a] >= 0;
 	}
 
 	/**
@@ -71,18 +60,8 @@ public class ArrayPath implements Path {
 	 */
 	@Override public void swap(int x, int y, int a, int b) {
 		ArrayList<Integer> reverse = new ArrayList<Integer>();
-		for (int i = indexMapping.get(y); i < Math.max(path.size(), indexMapping.get(a) + 1); i++){
-			reverse.add(path.get(i));
-		}
-		if (path.size() > indexMapping.get(a) + 1){
-			for (int i = 1; i < indexMapping.get(a) + 1; i++){
-				reverse.add(path.get(i));
-			}
-		}
-		for (int i = indexMapping.get(y); i < Math.max(path.size(), indexMapping.get(a) + 1); i++){
-			path.set(i, reverse.remove(path.size()-1));
-		}
-		reverse.add(path);
+		int current = y;
+		reverse.add(current);
 		while(current != a){
 			current = path[current];
 			reverse.add(current);

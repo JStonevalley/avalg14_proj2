@@ -20,7 +20,7 @@ public class GreedyConstructionTest {
 
 		int[][] distances = new DistanceNew().calculateDistances(nodes);
 		ConstructionHeuristic greedy = new GreedyConstruction(distances);
-		Path path = new ArrayPath(distances);
+		Path path = new LinkedListPath(distances);
 		greedy.construct(path);
 		Assert.assertEquals(323, path.getLength());
 		Assert.assertEquals("0-8-5-4-3-9-6-2-1-7\n", path.toDebugString());
