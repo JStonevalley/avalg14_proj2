@@ -88,9 +88,9 @@ public class TwoWayLinkedListPathTest {
 			path.setEdge((i-1), i);
 		}
 		path.setEdge(0, (numNodes-1));
-		Assert.assertEquals(35, path.getLength());
+		Assert.assertEquals(35, path.getLength(distances));
 		path.removeEdge(0, (numNodes-1));
-		Assert.assertEquals(28, path.getLength());
+		Assert.assertEquals(28, path.getLength(distances));
 	}
 
 	@Test

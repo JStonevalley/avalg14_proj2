@@ -2,17 +2,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-/**
- * Created by Johan Arnör on 27/11/14.
- */
 public class LinkedListPath implements Path {
 
 	private int[] path;
-	private int length;
-	private int[][] distances;
 
 	public LinkedListPath(int[][] distances) {
-		this.distances = distances;
 		path = new int[distances.length];
 		Arrays.fill(path, -1);
 	}
@@ -22,7 +16,7 @@ public class LinkedListPath implements Path {
 			throw new IllegalArgumentException("a already has an edge from it");
 		}
 		path[a] = b;
-		length += distances[a][b];
+//		length += distances[a][b];
 	}
 
 	@Override public void removeEdge(int a, int b) {
@@ -30,7 +24,7 @@ public class LinkedListPath implements Path {
 			throw new IllegalArgumentException("a does not have an edge from it");
 		}
 		path[a] = -1;
-		length -= distances[a][b];
+//		length -= distances[a][b];
 	}
 
 	@Override
@@ -38,7 +32,17 @@ public class LinkedListPath implements Path {
 		return path[node];
 	}
 
-	@Override public int getLength() {
+	@Override public int getLength(int[][] distances) {
+		int length = 0;
+		int startNode = path[0];
+		int currentNode = startNode;
+
+		do {
+			int nextNode = getNext(currentNode);
+			length += distances[currentNode][nextNode];
+			currentNode = nextNode;
+		} while (currentNode != startNode);
+
 		return length;
 	}
 
@@ -66,11 +70,11 @@ public class LinkedListPath implements Path {
 			path[reverse.get(i)] = reverse.get(i-1);
 		}
 		path[x] = a;
-		length -= distances[x][y];
-		length += distances[x][a];
+//		length -= distances[x][y];
+//		length += distances[x][a];
 		path[y] = b;
-		length -= distances[a][b];
-		length += distances[y][b];
+//		length -= distances[a][b];
+//		length += distances[y][b];
 	}
 
 	/**

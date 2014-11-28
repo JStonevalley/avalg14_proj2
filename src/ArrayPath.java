@@ -51,7 +51,7 @@ public class ArrayPath implements Path {
 		return path.get((indexMapping.get(node)+1) % path.size());
 	}
 
-	@Override public int getLength() {
+	@Override public int getLength(int[][] distances) {
 		return length;
 	}
 

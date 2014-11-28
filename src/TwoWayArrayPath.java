@@ -96,7 +96,7 @@ public class TwoWayArrayPath implements Path {
 	 * @return the total length of the path
 	 */
 	@Override
-	public int getLength() {
+	public int getLength(int[][] distances) {
 		return length;
 	}
 

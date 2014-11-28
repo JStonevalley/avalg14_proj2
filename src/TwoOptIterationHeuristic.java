@@ -2,38 +2,42 @@
 public class TwoOptIterationHeuristic {
 
 	public Path enhance(Path path, int[][] distances, int[][] closestNodes){
-		int length = path.getLength();
-		int oldLength = Integer.MAX_VALUE;
-		while (length < oldLength) {
-			oldLength = length;
-			outer: // TODO: Maybe enable this optimization later
+
+		boolean noChange = false;
+		while (!noChange) {
+			noChange = true;
+//			outer: // TODO: Maybe enable this optimization later
 			for (int i = 0; i < distances.length; i++) {
 				for (int j = 0; j < closestNodes[i].length; j++) {
 //					if (path.getNext(j) == closestNodes[j][0]) // TODO: Examine this optimization
 //						break;
-					int index = closestNodes[i][j];
-					path = checkSwap(path, distances, i, index);
-					length = Math.min(path.getLength(), length);
-					if (length < oldLength)
-						break outer; // TODO: Fiddle between breaking the inner or outer loop
+					int closeNode = closestNodes[i][j];
+					if (shouldSwap(path, distances, i, closeNode)) {
+						path.swap(i, path.getNext(i), closeNode, path.getNext(closeNode));
+						noChange = false;
+//						break outer; // TODO: Fiddle between breaking the inner or outer loop
+					}
+//					if (!noChange) { // TODO: Strange break which gives higher score in kattis
+//						break;
+//					}
 				}
 			}
 		}
+
 		return path;
 	}
 
-	// TODO: Maybe check only if one way is better?
-	private Path checkSwap(Path path, int[][] distances, int node1, int node2){
-		int oldNode1Neighbour = path.getNext(node1);
-		int oldNode2Neighbour = path.getNext(node2);
+	// Checks if x-y, a-b should be swapped to x-a, y-b
+	private boolean shouldSwap(Path path, int[][] distances, int x, int a) {
+		int y = path.getNext(x);
+		int b = path.getNext(a);
 
-		if (oldNode1Neighbour != node2 && oldNode2Neighbour != node1) {
-			int swapDistance = distances[node1][node2] + distances[oldNode1Neighbour][oldNode2Neighbour];
-			int oldDistance = distances[node1][oldNode1Neighbour] + distances[node2][oldNode2Neighbour];
-			if (swapDistance < oldDistance) {
-				path.swap(node1, oldNode1Neighbour, node2, oldNode2Neighbour);
-			}
+		int oldDistance = distances[x][y] + distances[a][b];
+		int newDistance = distances[x][a] + distances[y][b];
+
+		if (newDistance < oldDistance) {
+			return true;
 		}
-		return path;
+		return false;
 	}
 }

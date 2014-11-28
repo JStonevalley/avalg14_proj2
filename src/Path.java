@@ -25,10 +25,10 @@ public interface Path {
 	public int getNext(int node);
 
 	/**
-	 *
+	 * @param distance matrix of all the distances in the graph
 	 * @return the total length of the path
 	 */
-	public int getLength();
+	public int getLength(int[][] distance);
 
 	/**
 	 *

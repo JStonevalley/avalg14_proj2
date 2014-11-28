@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 public class Main {
 
 	private static boolean DEBUG = true;
-	private static int MAX_NO_CLOSEST_NODES = 20;
+	private static int MAX_NO_CLOSEST_NODES = 120;
 
 	public static void main(String[] args) throws Exception {
 
@@ -35,12 +35,12 @@ public class Main {
 		Path path = new LinkedListPath(distance); // Swap datastructure here
 		heuristic.construct(path);
 		if (DEBUG) {
-			io.println(path.getLength());
+			io.println(path.getLength(distance));
 			io.println(path.toDebugString());
 		}
 		path = new TwoOptIterationHeuristic().enhance(path, distance, closestNodes);
 		if (DEBUG) {
-			io.println(path.getLength());
+			io.println(path.getLength(distance));
 			io.println(path.toDebugString());
 			io.println((System.nanoTime() - startTime)/(1000*1000) + "ms");
 		}
