@@ -15,7 +15,7 @@ public class Main {
 		long startTime = System.nanoTime();
 		Kattio io;
 		if (DEBUG) {
-			io = new Kattio(new FileInputStream(new File("data/100.txt")), System.out);
+			io = new Kattio(new FileInputStream(new File("data/10.txt")), System.out);
 		} else {
 			io = new Kattio(System.in, System.out);
 		}
@@ -32,7 +32,7 @@ public class Main {
 		int[][] closestNodes = distanceClass.getClosestNodes(distance, MAX_NO_CLOSEST_NODES);
 		ConstructionHeuristic heuristic = new GreedyConstruction(distance);
 
-		Path path = new LinkedListPath(distance);
+		Path path = new ArrayPath(distance);
 		heuristic.construct(path);
 		if (DEBUG) {
 			io.println(path.getLength());

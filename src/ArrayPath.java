@@ -30,8 +30,10 @@ public class ArrayPath implements Path {
 			indexMapping.put(a, path.size());
 			path.add(a);
 		}
-		indexMapping.put(b, path.size());
-		path.add(b);
+		if(path.size() != distances.length) {
+			indexMapping.put(b, path.size());
+			path.add(b);
+		}
 		length += distances[a][b];
 	}
 
@@ -46,11 +48,11 @@ public class ArrayPath implements Path {
 
 	@Override
 	public int getNext(int node) {
-		return path.get(indexMapping.get(node));
+		return path.get((indexMapping.get(node)+1) % path.size());
 	}
 
-	@Override public int[] getNeighbourNodes(int currentNode) {
-		return new int[]{path.get(indexMapping.get(currentNode))};
+	@Override public int[] getNeighbourNodes(int node) {
+		return new int[]{path.get((indexMapping.get(node)+1) % path.size())};
 	}
 
 	@Override public int getLength() {
@@ -71,29 +73,30 @@ public class ArrayPath implements Path {
 	 */
 	@Override public void swap(int x, int y, int a, int b) {
 		ArrayList<Integer> reverse = new ArrayList<Integer>();
-		for (int i = indexMapping.get(y); i < Math.max(path.size(), indexMapping.get(a) + 1); i++){
+		int stop = indexMapping.get(a) + 1;
+		if (indexMapping.get(y) > stop){
+			stop = path.size();
+		}
+		for (int i = indexMapping.get(y); i < stop; i++){
 			reverse.add(path.get(i));
 		}
-		if (path.size() > indexMapping.get(a) + 1){
-			for (int i = 1; i < indexMapping.get(a) + 1; i++){
+		if (stop == path.size()){
+			for (int i = 0; i < indexMapping.get(a) + 1; i++){
 				reverse.add(path.get(i));
 			}
 		}
-		for (int i = indexMapping.get(y); i < Math.max(path.size(), indexMapping.get(a) + 1); i++){
-			path.set(i, reverse.remove(path.size()-1));
+		for (int i = indexMapping.get(y); i < stop; i++){
+			path.set(i, reverse.remove(reverse.size() - 1));
 		}
-		reverse.add(path);
-		while(current != a){
-			current = path[current];
-			reverse.add(current);
+		if (stop == path.size()){
+			for (int i = 0; i < indexMapping.get(a) + 1; i++){
+				path.set(i, reverse.remove(reverse.size() - 1));
+			}
 		}
-		for (int i = reverse.size()-1; i > 0; i--) {
-			path[reverse.get(i)] = reverse.get(i-1);
-		}
-		path[x] = a;
+
 		length -= distances[x][y];
 		length += distances[x][a];
-		path[y] = b;
+
 		length -= distances[a][b];
 		length += distances[y][b];
 	}
@@ -102,30 +105,12 @@ public class ArrayPath implements Path {
 	 * @return a string to follow the path
 	 */
 	@Override public String toDebugString() {
-		HashSet<Integer> inString = new HashSet<Integer>();
 		StringBuilder sb = new StringBuilder();
-		int numInPath = 1;
-		int start = 0;
-		int current = 0;
-
-		while(numInPath < path.length) {
-			for (int i = 0; i < path.length; i++) {
-				if(!inString.contains(i)){
-					start = i;
-					current = start;
-					sb.append(start);
-					inString.add(start);
-					numInPath++;
-					break;
-				}
+		if(path.size() > 0) {
+			sb.append(path.get(0));
+			for (int i = 1; i < path.size(); i++) {
+				sb.append("-" + path.get(i));
 			}
-			while (path[current] > -1 && path[current] != start) {
-				current = path[current];
-				sb.append("-" + current);
-				inString.add(current);
-				numInPath++;
-			}
-			sb.append("\n");
 		}
 		return sb.toString();
 	}
@@ -133,12 +118,11 @@ public class ArrayPath implements Path {
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		int start = 0;
-		int current = start;
-		sb.append(start);
-		while (path[current] > -1 && path[current] != start){
-			current = path[current];
-			sb.append("\n"+current);
+		if(path.size() > 0) {
+			sb.append(path.get(0));
+			for (int i = 1; i < path.size(); i++) {
+				sb.append("\n" + path.get(i));
+			}
 		}
 		return sb.toString();
 	}

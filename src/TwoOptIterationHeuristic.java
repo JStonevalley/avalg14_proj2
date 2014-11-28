@@ -16,7 +16,7 @@ public class TwoOptIterationHeuristic {
 						path = checkSwap(path, distances, i, index);
 						length = Math.min(path.getLength(), length);
 						if (length < oldLength)
-							break; // TODO: Fiddle between breaking the inner or outer loop
+							break outer; // TODO: Fiddle between breaking the inner or outer loop
 					}
 				}
 			}
