@@ -6,9 +6,11 @@ public class TwoOptIterationHeuristic {
 		int oldLength = Integer.MAX_VALUE;
 		while (length < oldLength) {
 			oldLength = length;
-//			outer: // TODO: Maybe enable this optimization later
+			outer: // TODO: Maybe enable this optimization later
 			for (int i = 0; i < distances.length; i++) {
 				for (int j = 0; j < closestNodes[i].length; j++) {
+//					if (path.getNext(j) == closestNodes[j][0]) // TODO: Examine this optimization
+//						break;
 					int index = closestNodes[i][j];
 					if (i != index) {
 						path = checkSwap(path, distances, i, index);
