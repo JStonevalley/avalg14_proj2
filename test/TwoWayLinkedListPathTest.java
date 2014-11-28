@@ -61,7 +61,7 @@ public class TwoWayLinkedListPathTest {
 				distances[i][j] = 7;
 			}
 		}
-		Path path = new TwoWayArrayPath(distances);
+		TwoWayArrayPath path = new TwoWayArrayPath(distances);
 		for (int i = 1; i < numNodes; i++) {
 			path.setEdge((i-1), i);
 		}

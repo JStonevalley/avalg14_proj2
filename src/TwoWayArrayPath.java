@@ -84,7 +84,6 @@ public class TwoWayArrayPath implements Path {
 	 * @param currentNode
 	 * @return int[] of neighbouring nodes. Values in the array that are -1 represent no neighbour
 	 */
-	@Override
 	public int[] getNeighbourNodes(int currentNode) {
 		return nodes[currentNode];
 	}

@@ -38,10 +38,6 @@ public class LinkedListPath implements Path {
 		return path[node];
 	}
 
-	@Override public int[] getNeighbourNodes(int currentNode) {
-		return new int[]{path[currentNode]};
-	}
-
 	@Override public int getLength() {
 		return length;
 	}

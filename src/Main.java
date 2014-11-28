@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 public class Main {
 
 	private static boolean DEBUG = true;
-	private static int MAX_NO_CLOSEST_NODES = 120;
+	private static int MAX_NO_CLOSEST_NODES = 20;
 
 	public static void main(String[] args) throws Exception {
 
@@ -15,7 +15,7 @@ public class Main {
 		long startTime = System.nanoTime();
 		Kattio io;
 		if (DEBUG) {
-			io = new Kattio(new FileInputStream(new File("data/10.txt")), System.out);
+			io = new Kattio(new FileInputStream(new File("data/1000.txt")), System.out);
 		} else {
 			io = new Kattio(System.in, System.out);
 		}
@@ -32,7 +32,7 @@ public class Main {
 		int[][] closestNodes = distanceClass.getClosestNodes(distance, MAX_NO_CLOSEST_NODES);
 		ConstructionHeuristic heuristic = new GreedyConstruction(distance);
 
-		Path path = new ArrayPath(distance); // Swap datastructure here
+		Path path = new LinkedListPath(distance); // Swap datastructure here
 		heuristic.construct(path);
 		if (DEBUG) {
 			io.println(path.getLength());

@@ -26,9 +26,9 @@ public class TwoOptIterationHeuristic {
 
 	// TODO: Maybe check only if one way is better?
 	private Path checkSwap(Path path, int[][] distances, int node1, int node2){
-		int oldNode1Neighbour, oldNode2Neighbour;
-		oldNode1Neighbour = path.getNeighbourNodes(node1)[0];
-		oldNode2Neighbour = path.getNeighbourNodes(node2)[0];
+		int oldNode1Neighbour = path.getNext(node1);
+		int oldNode2Neighbour = path.getNext(node2);
+
 		if (oldNode1Neighbour != node2 && oldNode2Neighbour != node1) {
 			int swapDistance = distances[node1][node2] + distances[oldNode1Neighbour][oldNode2Neighbour];
 			int oldDistance = distances[node1][oldNode1Neighbour] + distances[node2][oldNode2Neighbour];
