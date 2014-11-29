@@ -1,3 +1,5 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -30,6 +32,10 @@ public class LinkedListPath implements Path {
 	@Override
 	public int getNext(int node) {
 		return path[node];
+	}
+
+	@Override public boolean inOrder(int a, int b, int c) {
+		throw new NotImplementedException();
 	}
 
 	@Override public int getLength(int[][] distances) {

@@ -1,3 +1,5 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,6 +51,10 @@ public class ArrayPath implements Path {
 	@Override
 	public int getNext(int node) {
 		return path.get((indexMapping.get(node)+1) % path.size());
+	}
+
+	@Override public boolean inOrder(int a, int b, int c) {
+		throw new NotImplementedException();
 	}
 
 	@Override public int getLength(int[][] distances) {

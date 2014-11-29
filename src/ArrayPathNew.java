@@ -40,6 +40,14 @@ public class ArrayPathNew implements Path {
 		return path[(indices[node] + 1) % path.length];
 	}
 
+	@Override public boolean inOrder(int a, int b, int c) {
+		int aIndex = indices[a]; int bIndex = indices[b]; int cIndex = indices[c];
+		if (aIndex < bIndex && bIndex < cIndex) return true;
+		if (aIndex < bIndex && cIndex < aIndex) return true;
+		if (aIndex > bIndex && bIndex < cIndex && cIndex < aIndex) return true;
+		return false;
+	}
+
 	// TODO: Check if not equal in reversed order
 	@Override public int getLength(int[][] distances) {
 		int length = 0;

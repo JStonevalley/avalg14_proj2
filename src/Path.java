@@ -25,6 +25,12 @@ public interface Path {
 	public int getNext(int node);
 
 	/**
+	 *
+	 * @return true if a --> b --> c
+	 */
+	public boolean inOrder(int a, int b, int c);
+
+	/**
 	 * @param distance matrix of all the distances in the graph
 	 * @return the total length of the path
 	 */

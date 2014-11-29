@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 public class Main {
 
 	private static boolean DEBUG = true;
-	private static int MAX_NO_CLOSEST_NODES = 80;
+	private static int MAX_NO_CLOSEST_NODES = 120;
 
 	public static void main(String[] args) throws Exception {
 

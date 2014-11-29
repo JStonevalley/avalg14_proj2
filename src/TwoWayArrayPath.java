@@ -92,6 +92,10 @@ public class TwoWayArrayPath implements Path {
 		return -1;
 	}
 
+	@Override public boolean inOrder(int a, int b, int c) {
+		throw new NotImplementedException();
+	}
+
 	/**
 	 * @return the total length of the path
 	 */
