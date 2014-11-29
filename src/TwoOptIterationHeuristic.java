@@ -15,11 +15,13 @@ public class TwoOptIterationHeuristic {
 					if (shouldSwap(path, distances, i, closeNode)) {
 						path.swap(i, path.getNext(i), closeNode, path.getNext(closeNode));
 						noChange = false;
+//						System.out.println(path.getLength(distances));
+//						System.out.println(i + "," + closeNode + " --> " + path.toDebugString());
 //						break outer; // TODO: Fiddle between breaking the inner or outer loop
 					}
-//					if (!noChange) { // TODO: Strange break which gives higher score in kattis
-//						break;
-//					}
+					if (!noChange) { // TODO: Strange break which gives higher score in kattis
+						break;
+					}
 				}
 			}
 		}

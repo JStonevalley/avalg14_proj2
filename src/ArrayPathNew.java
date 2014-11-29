@@ -68,19 +68,28 @@ public class ArrayPathNew implements Path {
 		return indices[a] != NULL_NODE;
 	}
 
+	// May perform differently form LinkedList due to it might swap the other part instead.
 	@Override public void swap(int x, int y, int a, int b) {
-//		if (x >= path.length || y >= path.length || a >= path.length || b >= path.length) {
-//			throw new NullPointerException();
-//		}
-//		if (x < 0 || y < 0|| a < 0 || b < 0) {
-//			throw new NullPointerException();
-//		}
+		if (getNext(x) != y) { // TODO: Fix better than these workarounds
+			int tmp = x;
+			x = y;
+			y = tmp;
+		}
+		if (getNext(a) != b) { // TODO: Fix better than these workarounds
+			int tmp = a;
+			a = b;
+			b = tmp;
+		}
 
 		int aIndex = indices[a];
 		int yIndex = indices[y];
 
 		int bIndex = indices[b];
 		int xIndex = indices[x];
+
+		if (yIndex == aIndex || bIndex == xIndex) {
+			return; // if x --> y/a --> b, don't swap
+		}
 
 		if (yIndex < aIndex) reverse(yIndex, aIndex);
 		else if (bIndex < xIndex) reverse(bIndex, xIndex);
@@ -110,7 +119,6 @@ public class ArrayPathNew implements Path {
 			sb.append(path[i]);
 		}
 
-		sb.append("\n");
 		return sb.toString();
 	}
 

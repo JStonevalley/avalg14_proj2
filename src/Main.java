@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 public class Main {
 
 	private static boolean DEBUG = true;
-	private static int MAX_NO_CLOSEST_NODES = 120;
+	private static int MAX_NO_CLOSEST_NODES = 20;
 
 	public static void main(String[] args) throws Exception {
 
@@ -39,7 +39,7 @@ public class Main {
 			io.println(path.toDebugString());
 			io.flush();
 		}
-		path = new TwoOptIterationHeuristic().enhance(path, distance, closestNodes);
+		path = new ThreeOpt().enhance(path, distance, closestNodes);
 		if (DEBUG) {
 			io.println(path.getLength(distance));
 			io.println(path.toDebugString());
