@@ -15,7 +15,7 @@ public class Main {
 		long startTime = System.nanoTime();
 		Kattio io;
 		if (DEBUG) {
-			io = new Kattio(new FileInputStream(new File("data/1000.txt")), System.out);
+			io = new Kattio(new FileInputStream(new File("data/10000.txt")), System.out);
 		} else {
 			io = new Kattio(System.in, System.out);
 		}

@@ -1,9 +1,7 @@
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * Created by Johan Arnör on 27/11/14.
@@ -101,6 +99,10 @@ public class ArrayPath implements Path {
 
 		length -= distances[a][b];
 		length += distances[y][b];
+	}
+
+	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {
+		return;
 	}
 
 	/**

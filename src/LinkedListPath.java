@@ -79,6 +79,10 @@ public class LinkedListPath implements Path {
 		path[y] = b;
 	}
 
+	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {
+		return;
+	}
+
 	/**
 	 * @return a string to follow the path
 	 */

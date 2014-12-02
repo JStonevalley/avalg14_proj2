@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class ArrayPathNew implements Path {
 
@@ -93,6 +93,50 @@ public class ArrayPathNew implements Path {
 
 		if (yIndex < aIndex) reverse(yIndex, aIndex);
 		else if (bIndex < xIndex) reverse(bIndex, xIndex);
+	}
+
+	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {
+		ArrayList<Edge> edges = new ArrayList<Edge>(Arrays.asList(construction));
+		HashSet<Integer> fromNodes = new HashSet<Integer>();
+		HashSet<Integer> toNodes = new HashSet<Integer>();
+		for (Edge edge : edges){
+			fromNodes.add(edge.fromNode);
+			toNodes.add(edge.toNode);
+		}
+		int direction = 1;
+		int[] newPath = new int[path.length];
+		int currentIndex = indices[edges.get(0).fromNode];
+		int arrayIndex = 0;
+		while(arrayIndex < path.length){
+			newPath[arrayIndex] = path[currentIndex];
+			arrayIndex++;
+			if (fromNodes.contains(path[currentIndex])){
+				for (int i = 0; i < edges.size(); i++){
+					if (edges.get(i).fromNode == path[currentIndex]){
+						currentIndex = indices[edges.get(i).toNode];
+						break;
+					}
+				}
+				Boolean directionSet = false;
+				for (int node : originNodes){
+					if (node == path[currentIndex]){
+						direction = -1;
+						directionSet = true;
+						break;
+					}
+				}
+				if (directionSet == false){
+					direction = 1;
+				}
+			}
+			else{
+				currentIndex = (currentIndex + direction + path.length) % path.length;
+			}
+		}
+		path = newPath;
+		for(int i = 0; i < path.length; i++){
+			indices[path[i]] = i;
+		}
 	}
 
 	private void reverse(int startIndex, int endIndex) {

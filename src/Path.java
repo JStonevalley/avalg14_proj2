@@ -1,3 +1,4 @@
+
 public interface Path {
 	/**
 	 * Creates an edge between the the nodes a and b
@@ -51,6 +52,8 @@ public interface Path {
 	 * @param b to be connected to y was connected to a
 	 */
 	public void swap(int x, int y, int a, int b);
+
+	public void dynamicSwap(Edge[] construction, int[] originNodes);
 
 	/**
 	 *

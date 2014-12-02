@@ -127,6 +127,10 @@ public class TwoWayArrayPath implements Path {
 		throw new NotImplementedException(); //TODO implement if needed
 	}
 
+	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {
+		return;
+	}
+
 	private String getString(boolean debug){
 		HashSet<Integer> inString = new HashSet<Integer>();
 		StringBuilder sb = new StringBuilder();
