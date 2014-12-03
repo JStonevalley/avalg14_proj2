@@ -53,6 +53,15 @@ public interface Path {
 	public void swap(int x, int y, int a, int b);
 
 	/**
+	 * Performs a given number of shuffles in the path. Each shuffle takes two nodes and exchanges them.
+	 *
+	 * @param noShuffles the number of shuffles to be made.
+	 */
+	public void shuffle(int noShuffles);
+
+	public Path getCopy();
+
+	/**
 	 *
 	 * @return a string to follow the path
 	 */

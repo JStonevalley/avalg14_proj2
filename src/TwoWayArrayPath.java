@@ -127,6 +127,14 @@ public class TwoWayArrayPath implements Path {
 		throw new NotImplementedException(); //TODO implement if needed
 	}
 
+	@Override public void shuffle(int noNodes) {
+		throw new NotImplementedException();
+	}
+
+	@Override public Path getCopy() {
+		throw new NotImplementedException();
+	}
+
 	private String getString(boolean debug){
 		HashSet<Integer> inString = new HashSet<Integer>();
 		StringBuilder sb = new StringBuilder();

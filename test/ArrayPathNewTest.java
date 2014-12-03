@@ -38,6 +38,5 @@ public class ArrayPathNewTest {
 		Assert.assertFalse(path.inOrder(8, 2, 9));
 		Assert.assertFalse(path.inOrder(5, 9, 6));
 		Assert.assertFalse(path.inOrder(2, 0, 4));
-
 	}
 }

@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class ArrayPathNew implements Path {
 
@@ -10,6 +11,11 @@ public class ArrayPathNew implements Path {
 		path = new int[distances.length];
 		indices = new int[distances.length];
 		Arrays.fill(indices, NULL_NODE);
+	}
+
+	private ArrayPathNew(int[] path, int[] indices) {
+		this.path = path;
+		this.indices = indices;
 	}
 
 	// TODO: Make it less dangerous.
@@ -93,6 +99,34 @@ public class ArrayPathNew implements Path {
 
 		if (yIndex < aIndex) reverse(yIndex, aIndex);
 		else if (bIndex < xIndex) reverse(bIndex, xIndex);
+	}
+
+//	@Override public void shuffle(int noShuffles) {
+//		Random random = new Random();
+//		for (int i = 0; i < noShuffles; i++) {
+//			int node1 = random.nextInt(path.length);
+//			int node2 = random.nextInt(path.length);
+//			int node1Index = indices[node1];
+//			int node2Index = indices[node2];
+//
+//			path[node1Index] = node2;
+//			path[node2Index] = node1;
+//
+//			indices[node1] = node2Index;
+//			indices[node2] = node1Index;
+//		}
+//	}
+
+		@Override public void shuffle(int noShuffles) {
+			if (path.length < 5) return;
+			Random random = new Random();
+			int node = random.nextInt(path.length);
+			int startIndex = indices[node] % (path.length - 4);
+			reverse(startIndex, startIndex + 4);
+		}
+
+	@Override public Path getCopy() {
+		return new ArrayPathNew(Arrays.copyOf(path, path.length), Arrays.copyOf(indices, indices.length));
 	}
 
 	private void reverse(int startIndex, int endIndex) {
