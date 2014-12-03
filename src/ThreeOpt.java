@@ -11,7 +11,7 @@ public class ThreeOpt {
 					int node2 = closestNodes[i][j];
 					if (node2 != path.getNext(i) && path.getNext(node2) != i) {
 						for (int k = 0; k < closestNodes[j].length; k++) {
-							if (startTime + nanoSeconds < System.nanoTime()){
+							if (startTime + nanoSeconds < System.nanoTime()) {
 								return path;
 							}
 							int node3 = closestNodes[j][k];
@@ -73,23 +73,66 @@ public class ThreeOpt {
 		int node2Neighbour = path.getNext(node2);
 		int node3Neighbour = path.getNext(node3);
 
+		int first, middle, last, firstN, middleN, lastN;
+		first = middle = last = firstN = middleN = lastN = 0;
 		if (path.inOrder(node1, node2, node3)) {
-			constructions[0][0] = new Edge(node1, node3);
-			constructions[0][1] = new Edge(node2Neighbour, node1Neighbour);
-			constructions[0][2] = new Edge(node2, node3Neighbour);
-
-			constructions[1][0] = new Edge(node1, node2Neighbour);
-			constructions[1][1] = new Edge(node3, node1Neighbour);
-			constructions[1][2] = new Edge(node2, node3Neighbour);
-
-			constructions[2][0] = new Edge(node1, node2);
-			constructions[2][1] = new Edge(node1Neighbour, node3);
-			constructions[2][2] = new Edge(node2Neighbour, node3Neighbour);
-
-			constructions[3][0] = new Edge(node1, node2Neighbour);
-			constructions[3][1] = new Edge(node3, node2);
-			constructions[3][2] = new Edge(node1Neighbour, node3Neighbour);
+			first = node1;
+			middle = node2;
+			last = node3;
+			firstN = node1Neighbour;
+			middleN = node2Neighbour;
+			lastN = node3Neighbour;
+		} else if (path.inOrder(node1, node3, node2)) {
+			first = node1;
+			middle = node3;
+			last = node2;
+			firstN = node1Neighbour;
+			middleN = node3Neighbour;
+			lastN = node2Neighbour;
+		} else if (path.inOrder(node2, node1, node3)) {
+			first = node2;
+			middle = node1;
+			last = node3;
+			firstN = node2Neighbour;
+			middleN = node1Neighbour;
+			lastN = node3Neighbour;
+		} else if (path.inOrder(node2, node3, node1)) {
+			first = node2;
+			middle = node3;
+			last = node1;
+			firstN = node2Neighbour;
+			middleN = node3Neighbour;
+			lastN = node1Neighbour;
+		} else if (path.inOrder(node3, node1, node2)) {
+			first = node3;
+			middle = node1;
+			last = node2;
+			firstN = node3Neighbour;
+			middleN = node1Neighbour;
+			lastN = node2Neighbour;
+		} else if (path.inOrder(node3, node2, node1)) {
+			first = node3;
+			middle = node2;
+			last = node1;
+			firstN = node3Neighbour;
+			middleN = node2Neighbour;
+			lastN = node1Neighbour;
 		}
+		constructions[0][0] = new Edge(first, last);
+		constructions[0][1] = new Edge(middleN, firstN);
+		constructions[0][2] = new Edge(middle, lastN);
+
+		constructions[1][0] = new Edge(first, middleN);
+		constructions[1][1] = new Edge(last, firstN);
+		constructions[1][2] = new Edge(middle, lastN);
+
+		constructions[2][0] = new Edge(first, middle);
+		constructions[2][1] = new Edge(firstN, last);
+		constructions[2][2] = new Edge(middleN, lastN);
+
+		constructions[3][0] = new Edge(first, middleN);
+		constructions[3][1] = new Edge(last, middle);
+		constructions[3][2] = new Edge(firstN, lastN);
 
 		return constructions;
 	}
