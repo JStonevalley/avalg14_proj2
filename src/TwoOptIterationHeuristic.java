@@ -1,32 +1,45 @@
 
-public class TwoOptIterationHeuristic {
+public class TwoOptIterationHeuristic implements IterationHeuristic {
 
 	public Path enhance(Path path, int[][] distances, int[][] closestNodes){
 
-		boolean noChange = false;
-		while (!noChange) {
-			noChange = true;
-//			outer: // TODO: Maybe enable this optimization later
-			for (int i = 0; i < distances.length; i++) {
-				for (int j = 0; j < closestNodes[i].length; j++) {
-//					if (path.getNext(j) == closestNodes[j][0]) // TODO: Examine this optimization
-//						break;
-					int closeNode = closestNodes[i][j];
-					if (shouldSwap(path, distances, i, closeNode)) {
-						path.swap(i, path.getNext(i), closeNode, path.getNext(closeNode));
-						noChange = false;
-//						System.out.println(path.getLength(distances));
-//						System.out.println(i + "," + closeNode + " --> " + path.toDebugString());
-//						break outer; // TODO: Fiddle between breaking the inner or outer loop
-					}
-					if (!noChange) { // TODO: Strange break which gives higher score in kattis
-						break;
+		int length = Integer.MAX_VALUE;
+		Path bestPath = path;
+
+		for (int k = 0; k < 100; k++) {
+			boolean noChange = false;
+			while (!noChange) {
+				noChange = true;
+//							outer: // TODO: Maybe enable this optimization later
+				for (int i = 0; i < distances.length; i++) {
+					for (int j = 0; j < closestNodes[i].length; j++) {
+						//					if (path.getNext(j) == closestNodes[j][0]) // TODO: Examine this optimization
+						//						break;
+						int closeNode = closestNodes[i][j];
+						if (shouldSwap(path, distances, i, closeNode)) {
+							path.swap(i, path.getNext(i), closeNode, path.getNext(closeNode));
+							noChange = false;
+							//						System.out.println(path.getLength(distances));
+							//						System.out.println(i + "," + closeNode + " --> " + path.toDebugString());
+//													break outer; // TODO: Fiddle between breaking the inner or outer loop
+						}
+//						if (!noChange) { // TODO: Strange break which gives higher score in kattis
+//							break;
+//						}
 					}
 				}
 			}
+			int newLength = path.getLength(distances);
+			if (newLength < length) {
+				bestPath = path.getCopy();
+				length = newLength;
+			}
+			path.shuffle(20);
+			int shuffledLength = path.getLength(distances);
+			int hej = 0;
 		}
 
-		return path;
+		return bestPath;
 	}
 
 	// Checks if x-y, a-b should be swapped to x-a, y-b

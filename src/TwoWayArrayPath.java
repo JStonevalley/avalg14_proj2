@@ -127,6 +127,14 @@ public class TwoWayArrayPath implements Path {
 		throw new NotImplementedException(); //TODO implement if needed
 	}
 
+	@Override public void shuffle(int noNodes) {
+		throw new NotImplementedException();
+	}
+
+	@Override public Path getCopy() {
+		throw new NotImplementedException();
+	}
+
 	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {
 		return;
 	}

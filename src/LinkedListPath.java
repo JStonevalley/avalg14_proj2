@@ -3,6 +3,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Random;
 
 public class LinkedListPath implements Path {
 
@@ -77,6 +78,17 @@ public class LinkedListPath implements Path {
 		}
 		path[x] = a;
 		path[y] = b;
+	}
+
+	@Override public void shuffle(int noShuffles) {
+		Random random = new Random();
+		for (int i = 0; i < noShuffles; i++) {
+			int node = random.nextInt(path.length);
+		}
+	}
+
+	@Override public Path getCopy() {
+		throw new NotImplementedException();
 	}
 
 	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {

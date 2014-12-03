@@ -13,7 +13,7 @@ public class DistanceNew {
 				distances[i][j] = distance;
 				distances[j][i] = distance;
 			}
-			distances[i][i] = Integer.MAX_VALUE; // distance to itself = inf
+			distances[i][i] = Integer.MAX_VALUE/4; // distance to itself = inf
 		}
 		return distances;
 	}

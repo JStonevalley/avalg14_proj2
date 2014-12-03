@@ -105,6 +105,14 @@ public class ArrayPath implements Path {
 		return;
 	}
 
+	@Override public void shuffle(int noNodes) {
+
+	}
+
+	@Override public Path getCopy() {
+		return null;
+	}
+
 	/**
 	 * @return a string to follow the path
 	 */
