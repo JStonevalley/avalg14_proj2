@@ -1,8 +1,9 @@
 public class ThreeOpt {
 
-	public Path enhance(Path path, int[][] distances, int[][] closestNodes) {
+	public Path enhance(Path path, int[][] distances, int[][] closestNodes, long nanoSeconds) {
 
 		boolean noChange = false;
+		long startTime = System.nanoTime();
 		while (!noChange) {
 			noChange = true;
 			for (int i = 0; i < distances.length; i++) {
@@ -10,6 +11,9 @@ public class ThreeOpt {
 					int node2 = closestNodes[i][j];
 					if (node2 != path.getNext(i) && path.getNext(node2) != i) {
 						for (int k = 0; k < closestNodes[j].length; k++) {
+							if (startTime + nanoSeconds < System.nanoTime()){
+								return path;
+							}
 							int node3 = closestNodes[j][k];
 							if (node3 != i && node3 != path.getNext(node2)
 									&& path.getNext(node3) != node2
@@ -40,18 +44,6 @@ public class ThreeOpt {
 	private void threeSwap(Path path, Edge[] bestConstruction, int node1, int node2, int node3) {
 		int[] originNodes = new int[] { node1, node2, node3 };
 		path.dynamicSwap(bestConstruction, originNodes);
-
-		//		int one = bestConstruction[0].fromNode;
-		//		int oneN = bestConstruction[1].toNode;
-		//		int two = bestConstruction[2].fromNode;
-		//		int twoN = bestConstruction[1].fromNode;
-		//		int three = bestConstruction[0].toNode;
-		//		int threeN = bestConstruction[2].toNode;
-
-		//		path.swap(one, oneN, two, twoN);
-		//		System.out.println(path.toDebugString());
-		//		path.swap(three, threeN, one, two);
-		//		System.out.println(path.toDebugString());
 	}
 
 	private Edge[] getBestConstruction(Path path, int[][] distances, Edge[][] constructions, int oldNode1, int oldNode2,
