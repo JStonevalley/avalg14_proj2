@@ -1,4 +1,4 @@
-public class ThreeOpt {
+public class ThreeOpt{
 
 	public Path enhance(Path path, int[][] distances, int[][] closestNodes, long nanoSeconds) {
 
@@ -7,29 +7,31 @@ public class ThreeOpt {
 		while (!noChange) {
 			noChange = true;
 			for (int i = 0; i < distances.length; i++) {
+				int node1 = i;
 				for (int j = 0; j < closestNodes[i].length; j++) {
 					int node2 = closestNodes[i][j];
-					if (node2 != path.getNext(i) && path.getNext(node2) != i) {
+					if (path.getNext(node1) == node2){
+						break;
+					}
+					if (path.getNext(node2) != node1) {
 						for (int k = 0; k < closestNodes[j].length; k++) {
 							if (startTime + nanoSeconds < System.nanoTime()) {
 								return path;
 							}
 							int node3 = closestNodes[j][k];
-							if (node3 != i && node3 != path.getNext(node2)
-									&& path.getNext(node3) != node2
-									&& node3 != path.getNext(i)
-									&& path.getNext(node3) != i) { // nu är det bäst att hålla tungen rätt i mun!
-								Edge[][] constructions = getConstructions(path, i, closestNodes[i][j],
-										closestNodes[j][k]);
-								Edge[] bestConstruction = getBestConstruction(path, distances, constructions, i,
-										closestNodes[i][j], closestNodes[j][k]);
+							if (path.getNext(node2) == node3){
+								break;
+							}
+							if (node3 != node1 && path.getNext(node3) != node2
+									&& node3 != path.getNext(node1)
+									&& path.getNext(node3) != node1) {
+								Edge[][] constructions = getConstructions(path, node1, node2,
+										node3);
+								Edge[] bestConstruction = getBestConstruction(path, distances, constructions, node1,
+										node2, node3);
 								if (bestConstruction != null) {
-									//							System.out.println(path.toDebugString() + " | " + path.getLength(distances));
-									//							System.out.println("Swap: " + i + "," + closestNodes[i][j] + "," + closestNodes[j][k]);
-									threeSwap(path, bestConstruction, i, closestNodes[i][j], closestNodes[j][k]);
+									threeSwap(path, bestConstruction, node1, node2, node3);
 									noChange = false;
-									//							System.out.println(path.toDebugString() + " | " + path.getLength(distances));
-									//							System.out.println("-----------------------");
 								}
 							}
 						}
