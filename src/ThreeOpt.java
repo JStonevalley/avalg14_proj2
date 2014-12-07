@@ -1,9 +1,12 @@
 public class ThreeOpt{
-
+	int length;
 	public Path enhance(Path path, int[][] distances, int[][] closestNodes, long nanoSeconds) {
 
 		boolean noChange = false;
 		long startTime = System.nanoTime();
+		length = path.getLength(distances);
+		int prevLength = length;
+		int numImprovements = 0;
 		while (!noChange) {
 			noChange = true;
 			for (int i = 0; i < distances.length; i++) {
@@ -31,6 +34,7 @@ public class ThreeOpt{
 										node2, node3);
 								if (bestConstruction != null) {
 									threeSwap(path, bestConstruction, node1, node2, node3);
+									numImprovements++;
 									noChange = false;
 								}
 							}
@@ -39,7 +43,12 @@ public class ThreeOpt{
 				}
 			}
 		}
-
+//		System.out.println("----------------------------------------------------");
+//		System.out.println("Length was: " + prevLength);
+//		System.out.println("Number of improvements: " + numImprovements);
+//		System.out.println("Length is: " + path.getLength(distances));
+//		System.out.println("Length should be: " + length);
+//		System.out.println("----------------------------------------------------");
 		return path;
 	}
 
@@ -54,6 +63,7 @@ public class ThreeOpt{
 			return null;
 		int bestLength = distances[oldNode1][path.getNext(oldNode1)] + distances[oldNode2][path.getNext(oldNode2)]
 				+ distances[oldNode3][path.getNext(oldNode3)];
+		int prevLength = bestLength;
 		Edge[] bestConstruction = null;
 		for (Edge[] edges : constructions) {
 			int length = 0;
@@ -65,6 +75,7 @@ public class ThreeOpt{
 				bestLength = length;
 			}
 		}
+		this.length = length - (prevLength - bestLength);
 		return bestConstruction;
 	}
 

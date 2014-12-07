@@ -1,6 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
-import java.util.*;
 
 public class ArrayPathNew implements Path {
 
@@ -48,10 +49,15 @@ public class ArrayPathNew implements Path {
 	}
 
 	@Override public boolean inOrder(int a, int b, int c) {
-		int aIndex = indices[a]; int bIndex = indices[b]; int cIndex = indices[c];
-		if (aIndex < bIndex && bIndex < cIndex) return true;
-		if (aIndex < bIndex && cIndex < aIndex) return true;
-		if (aIndex > bIndex && bIndex < cIndex && cIndex < aIndex) return true;
+		int aIndex = indices[a];
+		int bIndex = indices[b];
+		int cIndex = indices[c];
+		if (aIndex < bIndex && bIndex < cIndex)
+			return true;
+		if (aIndex < bIndex && cIndex < aIndex)
+			return true;
+		if (aIndex > bIndex && bIndex < cIndex && cIndex < aIndex)
+			return true;
 		return false;
 	}
 
@@ -71,7 +77,8 @@ public class ArrayPathNew implements Path {
 	}
 
 	@Override public boolean inPath(int a) {
-		if (a < 0 || a >= path.length) throw new NullPointerException();
+		if (a < 0 || a >= path.length)
+			throw new NullPointerException();
 		return indices[a] != NULL_NODE;
 	}
 
@@ -98,15 +105,17 @@ public class ArrayPathNew implements Path {
 			return; // if x --> y/a --> b, don't swap
 		}
 
-		if (yIndex < aIndex) reverse(yIndex, aIndex);
-		else if (bIndex < xIndex) reverse(bIndex, xIndex);
+		if (yIndex < aIndex)
+			reverse(yIndex, aIndex);
+		else if (bIndex < xIndex)
+			reverse(bIndex, xIndex);
 	}
 
 	@Override public void dynamicSwap(Edge[] construction, int[] originNodes) {
 		ArrayList<Edge> edges = new ArrayList<Edge>(Arrays.asList(construction));
 		HashSet<Integer> fromNodes = new HashSet<Integer>();
 		HashSet<Integer> toNodes = new HashSet<Integer>();
-		for (Edge edge : edges){
+		for (Edge edge : edges) {
 			fromNodes.add(edge.fromNode);
 			toNodes.add(edge.toNode);
 		}
@@ -114,61 +123,63 @@ public class ArrayPathNew implements Path {
 		int[] newPath = new int[path.length];
 		int currentIndex = indices[edges.get(0).fromNode];
 		int arrayIndex = 0;
-		while(arrayIndex < path.length){
+		while (arrayIndex < path.length) {
 			newPath[arrayIndex] = path[currentIndex];
 			arrayIndex++;
-			if (fromNodes.contains(path[currentIndex])){
-				for (int i = 0; i < edges.size(); i++){
-					if (edges.get(i).fromNode == path[currentIndex]){
+			if (fromNodes.contains(path[currentIndex])) {
+				for (int i = 0; i < edges.size(); i++) {
+					if (edges.get(i).fromNode == path[currentIndex]) {
 						currentIndex = indices[edges.get(i).toNode];
 						break;
 					}
 				}
 				Boolean directionSet = false;
-				for (int node : originNodes){
-					if (node == path[currentIndex]){
+				for (int node : originNodes) {
+					if (node == path[currentIndex]) {
 						direction = -1;
 						directionSet = true;
 						break;
 					}
 				}
-				if (directionSet == false){
+				if (directionSet == false) {
 					direction = 1;
 				}
-			}
-			else{
+			} else {
 				currentIndex = (currentIndex + direction + path.length) % path.length;
 			}
 		}
 		path = newPath;
-		for(int i = 0; i < path.length; i++){
+		for (int i = 0; i < path.length; i++) {
 			indices[path[i]] = i;
 		}
 	}
 
-//	@Override public void shuffle(int noShuffles) {
-//		Random random = new Random();
-//		for (int i = 0; i < noShuffles; i++) {
-//			int node1 = random.nextInt(path.length);
-//			int node2 = random.nextInt(path.length);
-//			int node1Index = indices[node1];
-//			int node2Index = indices[node2];
+//		@Override public void shuffle(int noShuffles) {
+//			Random random = new Random();
+//			for (int i = 0; i < noShuffles; i++) {
+//				int node1 = random.nextInt(path.length);
+//				int node2 = random.nextInt(path.length);
+//				int node1Index = indices[node1];
+//				int node2Index = indices[node2];
 //
-//			path[node1Index] = node2;
-//			path[node2Index] = node1;
+//				path[node1Index] = node2;
+//				path[node2Index] = node1;
 //
-//			indices[node1] = node2Index;
-//			indices[node2] = node1Index;
+//				indices[node1] = node2Index;
+//				indices[node2] = node1Index;
+//			}
 //		}
-//	}
 
-		@Override public void shuffle(int noShuffles) {
-			if (path.length < 5) return;
-			Random random = new Random();
+	@Override public void shuffle(int noShuffles) {
+		if (path.length < 5)
+			return;
+		Random random = new Random();
+		for (int i = 0; i < noShuffles; i++) {
 			int node = random.nextInt(path.length);
-			int startIndex = indices[node] % (path.length - 4);
-			reverse(startIndex, startIndex + 4);
+			int startIndex = indices[node] % (path.length - 2);
+			reverse(startIndex, startIndex + 2);
 		}
+	}
 
 	@Override public Path getCopy() {
 		return new ArrayPathNew(Arrays.copyOf(path, path.length), Arrays.copyOf(indices, indices.length));
@@ -185,7 +196,8 @@ public class ArrayPathNew implements Path {
 			indices[path[startIndex]] = tempIndex;
 			path[startIndex] = tempNode;
 
-			endIndex--; startIndex++;
+			endIndex--;
+			startIndex++;
 		}
 	}
 
@@ -202,7 +214,7 @@ public class ArrayPathNew implements Path {
 	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(path[0]);

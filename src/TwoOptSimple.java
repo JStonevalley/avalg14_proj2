@@ -11,6 +11,9 @@ public class TwoOptSimple implements IterationHeuristic {
 			for (int i = 0; i < distances.length - 1; i++) {
 				for (int j = 0; j < closestNodes[i].length; j++) {
 					int node = closestNodes[i][j];
+					if (node == path.getNext(i)){
+						break;
+					}
 					if (shouldSwap(path, distances, i, node)) {
 						path.swap(i, path.getNext(i), node, path.getNext(node));
 						noChange = false;
